@@ -76,13 +76,13 @@ namespace LegendaryArmory
 
 			_armoryCornerIcon.Click += delegate 
 			{
-				_armoryService.UpdateAmounts(Gw2ApiManager);
+				_armoryService.UpdateAmounts(Gw2ApiManager, _armoryView);
 				_armoryWindow.ToggleWindow(_armoryView); 
 			};
 
 			Gw2ApiManager.SubtokenUpdated += delegate
 			{
-				_armoryService.UpdateAmounts(Gw2ApiManager);
+				_armoryService.UpdateAmounts(Gw2ApiManager, _armoryView);
 			};
 		}
 

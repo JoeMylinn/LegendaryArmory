@@ -1,17 +1,11 @@
-﻿using Blish_HUD;
-using Blish_HUD.Content;
-using Blish_HUD.Controls;
+﻿using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
+using Gw2Sharp;
 using Gw2Sharp.WebApi.V2.Models;
-using LegendaryArmory.Models;
 using LegendaryArmory.Services;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using SharpDX.MediaFoundation;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LegendaryArmory.UI
 {
@@ -23,9 +17,16 @@ namespace LegendaryArmory.UI
 		private List<string> offHand = new List<string>{ "Focus", "Warhorn", "Torch", "Shield" };
 		private List<string> trinkets = new List<string> { "Accessory", "Ring", "Amulet" };
 
+		public List<(int, LegendaryImage)> LegendaryImages = new List<(int, LegendaryImage)>();
+
 		public ArmoryView(ArmoryService armoryService)
 		{
 			this.armoryService = armoryService;
+			foreach (var item in armoryService.LegendaryItems)
+			{
+				LegendaryImages.Add((item.Id, ImageFromItem(item)));
+			}
+
 		}
 
 		protected override void Build(Container buildPanel)
@@ -37,6 +38,20 @@ namespace LegendaryArmory.UI
 				Height = buildPanel.ContentRegion.Height,
 				FlowDirection = ControlFlowDirection.SingleTopToBottom
 			};
+
+			var itemView = new FilterFlowPanel
+			{
+				Parent = buildPanel,
+				Left = menu.Right,
+				Width = buildPanel.ContentRegion.Width - menu.Width,
+				Height = buildPanel.ContentRegion.Height,
+				FlowDirection = ControlFlowDirection.LeftToRight,
+				ShowBorder = true,
+				CanScroll = true,
+				OuterControlPadding = new Vector2(Panel.LEFT_PADDING, Panel.TOP_PADDING)
+			};
+
+			BuildCategories(itemView);
 
 			var weaponPanel = new FlowPanel
 			{
@@ -54,30 +69,7 @@ namespace LegendaryArmory.UI
 				Parent = weaponPanel,
 				Width = weaponPanel.Width,
 				Height = weaponPanel.Height,
-			};
-
-			var allWeaponsMenuItem = new MenuItem
-			{
-				Parent = weaponMenu,
-				Text = "All Types"
-			};
-
-			var twoHandedMenuItem = new MenuItem
-			{
-				Parent = weaponMenu,
-				Text = "Two-Handed"
-			};
-
-			var oneHandedMenuItem = new MenuItem
-			{
-				Parent = weaponMenu,
-				Text = "One-Handed"
-			};
-
-			var offHandMenuItem = new MenuItem
-			{
-				Parent = weaponMenu,
-				Text = "Off Hand"
+				CanSelect = true,
 			};
 
 			var armorPanel = new FlowPanel
@@ -96,30 +88,7 @@ namespace LegendaryArmory.UI
 				Parent = armorPanel,
 				Width = armorPanel.Width,
 				Height = armorPanel.Height,
-			};
-
-			var allArmorsMenuItem = new MenuItem
-			{
-				Parent = armorMenu,
-				Text = "All Weights"
-			};
-
-			var lightArmorMenuItem = new MenuItem
-			{
-				Parent = armorMenu,
-				Text = "Light"
-			};
-
-			var mediumArmorMenuItem = new MenuItem
-			{
-				Parent = armorMenu,
-				Text = "Medium"
-			};
-
-			var heavyArmorMenuItem = new MenuItem
-			{
-				Parent = armorMenu,
-				Text = "Heavy"
+				CanSelect = true,
 			};
 
 			var otherPanel = new FlowPanel
@@ -137,56 +106,218 @@ namespace LegendaryArmory.UI
 				Parent = otherPanel,
 				Width = otherPanel.Width,
 				Height = otherPanel.Height,
+				CanSelect = true,
 			};
 
-			var allOtherMenuItem = new MenuItem
+			var allWeaponsMenuItem = weaponMenu.AddMenuItem("All Types");
+			foreach (var category in LegendaryImages.Where(_ => _.Item2.Type == ItemType.Weapon).SelectMany(_ => _.Item2.WieldType).Distinct())
 			{
-				Parent = otherMenu,
-				Text = "All Types"
-			};
+				var subMenu = weaponMenu.AddMenuItem(category.ToString());
+				subMenu.Click += delegate
+				{
+					DeselctAll(armorMenu);
+					DeselctAll(otherMenu);
+					itemView.Filter(item => item.Type == ItemType.Weapon && item.WieldType.Contains(category));
+				};
+			}
 
-			var backpacksMenuItem = new MenuItem
+			allWeaponsMenuItem.Select();
+
+			var allArmorsMenuItem = armorMenu.AddMenuItem("All Weights");
+			foreach (var category in LegendaryImages.Where(_ => _.Item2.Type == ItemType.Armor).Select(_ => _.Item2.WeightClass).Distinct().ToList())
 			{
-				Parent = otherMenu,
-				Text = "Backpacks"
-			};
+				var subMenu = armorMenu.AddMenuItem(category.ToString());
+				subMenu.Click += delegate
+				{
+					DeselctAll(weaponMenu);
+					DeselctAll(otherMenu);
+					itemView.Filter(item => item.Type == ItemType.Armor && item.WeightClass == category);
+				};
+			}
 
-			var trinketsMenuItem = new MenuItem
+			var allOtherMenuItem = otherMenu.AddMenuItem("All Types");
+			foreach (var category in LegendaryImages.Where(_ => _.Item2.Type != ItemType.Armor && _.Item2.Type != ItemType.Weapon).Select(_ => _.Item2.Type).Distinct().ToList())
 			{
-				Parent = otherMenu,
-				Text = "Accessories"
-			};
+				var subMenu = otherMenu.AddMenuItem(category.ToString());
+				subMenu.Click += delegate
+				{
+					DeselctAll(weaponMenu);
+					DeselctAll(armorMenu);
+					itemView.Filter(item => item.Type == category);
+				};
+			}
 
-			var upgradesMenuItem = new MenuItem
+
+
+			allWeaponsMenuItem.Click += delegate
 			{
-				Parent = otherMenu,
-				Text = "Upgrades"
+				DeselctAll(armorMenu);
+				DeselctAll(otherMenu);
+				itemView.Filter(item => item.Type == ItemType.Weapon);
 			};
 
-			var armoryView = new ViewContainer
+			allArmorsMenuItem.Click += delegate
 			{
-				Parent = buildPanel,
-				Left = menu.Right,
-				Width = buildPanel.ContentRegion.Width - menu.Width,
-				Height = buildPanel.ContentRegion.Height,
-				ShowBorder = true
+				DeselctAll(weaponMenu);
+				DeselctAll(otherMenu);
+				itemView.Filter(item => item.Type == ItemType.Armor);
 			};
 
-			allWeaponsMenuItem.Click += (sender, e) => armoryView.Show(new WeaponView(armoryService.GetWeapons()));
-			twoHandedMenuItem.Click += (sender, e) => armoryView.Show(new WeaponView(armoryService.GetWeapons().Where(_ => _.Item2.WieldType == Gw2Sharp.ProfessionWeaponFlag.TwoHand).ToList()));
-			oneHandedMenuItem.Click += (sender, e) => armoryView.Show(new WeaponView(armoryService.GetWeapons().Where(_ => _.Item2.WieldType == Gw2Sharp.ProfessionWeaponFlag.Mainhand).ToList()));
-			offHandMenuItem.Click += (sender, e) => armoryView.Show(new WeaponView(armoryService.GetWeapons().Where(_ => _.Item2.WieldType == Gw2Sharp.ProfessionWeaponFlag.Offhand).ToList()));
-			allArmorsMenuItem.Click += (sender, e) => armoryView.Show(new ArmorView(armoryService.GetArmors()));
-			lightArmorMenuItem.Click += (sender, e) => armoryView.Show(new ArmorView(armoryService.GetArmors().Where(_ => _.Item2.WeightType == ItemWeightType.Light).ToList()));
-			mediumArmorMenuItem.Click += (sender, e) => armoryView.Show(new ArmorView(armoryService.GetArmors().Where(_ => _.Item2.WeightType == ItemWeightType.Medium).ToList()));
-			heavyArmorMenuItem.Click += (sender, e) => armoryView.Show(new ArmorView(armoryService.GetArmors().Where(_ => _.Item2.WeightType == ItemWeightType.Heavy).ToList()));
-			allOtherMenuItem.Click += (sender, e) => armoryView.Show(new MiscView(armoryService.GetOthers()));
-			backpacksMenuItem.Click += (sender, e) => armoryView.Show(new MiscView(armoryService.GetOthers(true).Where(_ => _.Item2.SubType == SubType.Back).ToList()));
-			trinketsMenuItem.Click += (sender, e) => armoryView.Show(new MiscView(armoryService.GetOthers(true).Where(_ => _.Item2.Type == ItemType.Trinket).ToList()));
-			upgradesMenuItem.Click += (sender, e) => armoryView.Show(new MiscView(armoryService.GetOthers(true).Where(_ => _.Item2.Type == ItemType.UpgradeComponent).ToList()));
+			allOtherMenuItem.Click += delegate
+			{
+				DeselctAll(weaponMenu);
+				DeselctAll(armorMenu);
+				itemView.Filter(item => item.Type != ItemType.Armor && item.Type != ItemType.Weapon);
+			};
 
 			base.Build(buildPanel);
 		}
+
+		private LegendaryImage ImageFromItem(Item item)
+		{ 
+			LegendaryImage image = new LegendaryImage()
+			{
+				Type = item.Type,
+				Texture = armoryService.GetIconFromUrl(item.Icon),
+				Width = 64,
+				Height = 64,
+				Opacity = (float)0.3,
+				BasicTooltipText = item.Name + " - ID: " +  item.Id.ToString(),
+			};
+
+			switch(item.Type.ToEnum())
+			{
+				case ItemType.Weapon:
+					AddWeaponValues((ItemWeapon)item, image);
+					break;
+				case ItemType.Armor:
+					AddArmorValues((ItemArmor)item, image);
+					break;
+				default:
+					break;
+			}
+
+			return image;
+		}
+
+		private void BuildCategories(Container buildPanel)
+		{
+			//TODO: Simplify to single repeated function
+			//Weapon Categories
+			var weapons = LegendaryImages.Where(_ => _.Item2.Type == ItemType.Weapon).Select(_ => _.Item2).ToList();
+			foreach (var gen in weapons.Select(_ => _.Generation).Distinct().ToList())
+			{
+				var categoryPanel = new FlowPanel()
+				{
+					Title = gen.ToString(),
+					Parent = buildPanel,
+					Width = buildPanel.ContentRegion.Width - 24,
+					HeightSizingMode = SizingMode.AutoSize,
+					CanCollapse = true,
+					Collapsed = false,
+					OuterControlPadding = new Vector2(5, 5),
+					ControlPadding = new Vector2(5, 5)
+				};
+				foreach(var weapon in weapons.Where(_ => _.Generation == gen)) { 
+						weapon.Parent = categoryPanel;				
+				}
+			}
+
+			//Armor Categories
+			var armors = LegendaryImages.Where(_ => _.Item2.Type == ItemType.Armor).Select(_ => _.Item2).ToList();
+			foreach (var slot in armors.Select(_ => _.Slot).Distinct().ToList())
+			{
+				var categoryPanel = new FlowPanel()
+				{
+					Title = slot.ToString(),
+					Parent = buildPanel,
+					Width = buildPanel.ContentRegion.Width - 24,
+					HeightSizingMode = SizingMode.AutoSize,
+					CanCollapse = true,
+					Collapsed = false,
+					OuterControlPadding = new Vector2(5, 5),
+					ControlPadding = new Vector2(5, 5)
+				};
+				foreach (var armor in armors.Where(_ => _.Slot == slot))
+				{
+					armor.Parent = categoryPanel;
+				}
+			}
+
+			//Misc Categories
+			var misc = LegendaryImages.Where(_ => _.Item2.Type != ItemType.Weapon && _.Item2.Type != ItemType.Armor).Select(_ => _.Item2).ToList();
+			foreach (var category in misc.Select(_ => _.Type).Distinct().ToList())
+			{
+				var categoryPanel = new FlowPanel()
+				{
+					Title = category.ToString(),
+					Parent = buildPanel,
+					Width = buildPanel.ContentRegion.Width - 24,
+					HeightSizingMode = SizingMode.AutoSize,
+					CanCollapse = true,
+					Collapsed = false,
+					OuterControlPadding = new Vector2(5, 5),
+					ControlPadding = new Vector2(5, 5)
+				};
+				foreach (var item in misc.Where(_ => _.Type == category))
+				{
+					item.Parent = categoryPanel;
+				}
+			}
+		}
+
+		private void AddArmorValues(ItemArmor item, LegendaryImage image)
+		{
+			image.WeightClass = item.Details.WeightClass;
+			image.Slot = item.Details.Type;
+		}
+
+		private void AddWeaponValues(ItemWeapon item, LegendaryImage image)
+		{
+			image.Generation = item.Id switch
+			{
+				<= 30704 => 1,
+				> 30704 and <= 90551 => 2,
+				> 90551 and <= 97783 => 3,
+				_ => 0,
+			};
+			image.WieldType = GetWeaponFlags(item.Details.Type.ToString());
+		}
+
+		private List<ProfessionWeaponFlag> GetWeaponFlags(string weapon)
+		{
+			//Workaround for inconsistent naming in api
+			if(weapon == "Harpoon")
+			{
+				weapon = "Spear";
+			}
+			List <ProfessionWeaponFlag> result = new List<ProfessionWeaponFlag>();
+			foreach (var flags in armoryService.ProfessionWeapons.Where(_ => _.Key.Equals(weapon, System.StringComparison.OrdinalIgnoreCase)).Select(_ => _.Value.Flags))
+			{
+				foreach (var flag in flags)
+				{
+					result.Add(flag);
+				}
+			}
+			return result;
+		}
+
+		private void DeselctAll(Menu menu)
+		{
+			foreach (var menuItem in menu.GetChildrenOfType<MenuItem>())
+			{
+				menuItem.Deselect();
+			}
+		}
+
+		public void UpdateAmounts(List<AccountLegendaryArmory> owned)
+		{
+			foreach (var item in owned) {
+				foreach(var img in LegendaryImages.Where(_ => _.Item1 == item.Id)) {
+					img.Item2.Amount = item.Count;
+				}
+			}
+		} 
 
 		private void TwoHanded_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
 		{

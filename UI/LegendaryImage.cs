@@ -1,24 +1,63 @@
 ﻿using Blish_HUD;
-using Blish_HUD.Content;
 using Blish_HUD.Controls;
-using Microsoft.Xna.Framework;
+using Gw2Sharp;
+using Gw2Sharp.WebApi.V2.Models;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.BitmapFonts;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Color = Microsoft.Xna.Framework.Color;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace LegendaryArmory.UI
 {
 	internal class LegendaryImage : Image
 	{
 		private int _amount;
+
+		private int _generation;
+
+		private ItemType _type;
+
+		private ItemArmorSlotType _slot;
+
+		private List<ProfessionWeaponFlag> _wieldType;
+
+		private ItemWeightType _weightClass;
 		public int Amount
 		{
 			get => _amount;
-			set => SetProperty(ref _amount, value);
+			set{
+				SetProperty(ref _amount, value);
+				Opacity = (float)(_amount > 0 ? 1 : 0.3);
+			}
+		}
+
+		public ItemType Type {
+			get => _type;
+			set => SetProperty(ref _type, value);
+		}
+
+		public List<ProfessionWeaponFlag> WieldType {
+			get => _wieldType;
+			set => SetProperty(ref _wieldType, value);
+		}
+
+		public ItemWeightType WeightClass
+		{
+			get => _weightClass;
+			set => SetProperty(ref _weightClass, value);
+		}
+
+		public ItemArmorSlotType Slot
+		{
+			get => _slot;
+			set => SetProperty(ref _slot, value);
+		}
+
+		public int Generation
+		{
+			get => _generation;
+			set =>SetProperty(ref _generation, value);
 		}
 
 		private BitmapFont _font = GameService.Content.DefaultFont16;

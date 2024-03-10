@@ -3,10 +3,12 @@ using Blish_HUD.Content;
 using Blish_HUD.Modules.Managers;
 using Gw2Sharp.WebApi.V2;
 using Gw2Sharp.WebApi.V2.Models;
-using LegendaryArmory.Models;
+using LegendaryArmory.UI;
+using SharpDX.Direct2D1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Configuration;
 
 namespace LegendaryArmory.Services
 {
@@ -14,9 +16,10 @@ namespace LegendaryArmory.Services
 	{
 		private static Logger Logger = Logger.GetLogger<ArmoryService>();
 
-		public List<WeaponItem> weapons = new List<WeaponItem>();
-		public List<ArmorItem> armors = new List<ArmorItem>();
-		public List<OtherItem> other = new List<OtherItem>();
+		public List<Item> LegendaryItems = new List<Item>();
+		public List<AccountLegendaryArmory> OwnedLegendaries = new List<AccountLegendaryArmory>();
+		public List<KeyValuePair<String, ProfessionWeapon>> ProfessionWeapons = new List<KeyValuePair<String, ProfessionWeapon>>();
+		public List<Skin> WeaponVariants = new List<Skin>();
 		public ArmoryService(Gw2ApiManager apiManager) 
 		{
 				InitLegendaries(apiManager.Gw2ApiClient.V2);	
@@ -24,51 +27,20 @@ namespace LegendaryArmory.Services
 
 		private void InitLegendaries (IGw2WebApiV2Client apiClient) 
 		{
-			List<Item> legendaries = new List<Item>();
-			List<Skin> variants = new List<Skin>();
 			List<Gw2Sharp.WebApi.V2.Models.LegendaryArmory> legendaryIds = new List<Gw2Sharp.WebApi.V2.Models.LegendaryArmory>();
 			try
 			{
 				Logger.Debug("Getting Legendaries from API.");
 				legendaryIds = apiClient.LegendaryArmory.AllAsync().Result.ToList();
-				legendaries = (List<Item>)apiClient.Items.ManyAsync(legendaryIds.Select(item => item.Id)).Result;
-				variants = apiClient.Skins.ManyAsync(variantSkinIds).Result.ToList();
+				LegendaryItems = (List<Item>)apiClient.Items.ManyAsync(legendaryIds.Select(item => item.Id)).Result;
+				WeaponVariants = apiClient.Skins.ManyAsync(variantSkinIds).Result.ToList();
+				ProfessionWeapons = apiClient.Professions.AllAsync().Result.ToList().SelectMany(_ => _.Weapons).ToList();
+				
 			} catch (Exception ex)
 			{
 				Logger.Warn(ex, "Failed to get Legendaries.");
 			}
-
-			foreach(Item legendary in legendaries)
-			{
-				switch (legendary.Type.ToEnum())
-				{
-					case ItemType.Weapon:
-						ItemWeapon weapon = (ItemWeapon)legendary;
-						AddLegendaryWeapon(weapon, legendaryIds.Find(item => item.Id == legendary.Id).MaxCount);
-						break;
-					case ItemType.Armor:
-						ItemArmor armor = (ItemArmor)legendary;
-						AddLegendaryArmor(armor, legendaryIds.Find(item => item.Id == legendary.Id).MaxCount);
-						break;
-					case ItemType.Trinket:
-						ItemTrinket trinket = (ItemTrinket)legendary;
-						AddLegendaryTrinket(trinket, legendaryIds.Find(item => item.Id == legendary.Id).MaxCount);
-						break;
-					case ItemType.Back:
-						ItemBack back = (ItemBack)legendary;
-						AddLegendaryBack(back, legendaryIds.Find(item => item.Id == legendary.Id).MaxCount);
-						break;
-					case ItemType.UpgradeComponent:
-						ItemUpgradeComponent upgrade = (ItemUpgradeComponent)legendary;
-						AddLegendaryUpgrade(upgrade, legendaryIds.Find(item => item.Id == legendary.Id).MaxCount);
-						break;
-					default:
-						break;
-				}
-			}
-			weapons.Sort((a, b) => { return a.Id.CompareTo(b.Id); });
-			armors.Sort((a, b) => { return a.Id.CompareTo(b.Id); });
-			other.Sort((a, b) => { return a.Id.CompareTo(b.Id); });
+			LegendaryItems.Sort((a, b) => { return a.Id.CompareTo(b.Id); });
 
 			//TODO: Figure out proper sorting
 			/*foreach (Skin variant in variants)
@@ -76,100 +48,6 @@ namespace LegendaryArmory.Services
 				AddLegendaryVariant((SkinWeapon)variant);
 			}
 */
-		}
-
-		private void AddLegendaryWeapon(ItemWeapon item, int maxAmount)
-		{
-			weapons.Add(new WeaponItem()
-			{
-				Id = item.Id,
-				Name = item.Name,
-				IconId = GetIconIDFromUrl(item.Icon),
-				Description = item.Description,
-				ChatLink = item.ChatLink,
-				Type = item.Type,
-				Amount = 0,
-				MaxAmount = maxAmount,
-				WeaponType = item.Details.Type,
-				Generation = item.Id switch 
-				{
-					<=30704 => 1,
-					>30704 and <= 90551 => 2,
-					>90551 and <= 97783 => 3,
-					_ => 0,
-				}
-			});
-		}
-
-		private void AddLegendaryArmor(ItemArmor item, int maxAmount)
-		{
-			armors.Add(new ArmorItem()
-			{
-				Id = item.Id,
-				Name = item.Name,
-				IconId = GetIconIDFromUrl(item.Icon),
-				Description = item.Description,
-				ChatLink = item.ChatLink,
-				Type = item.Type,
-				Amount = 0,
-				MaxAmount = maxAmount,
-				WeightType = item.Details.WeightClass,
-				SlotType = item.Details.Type
-			});
-		}
-
-		private void AddLegendaryTrinket(ItemTrinket item, int maxAmount)
-		{
-			other.Add(new OtherItem()
-			{
-				Id = item.Id,
-				Name = item.Name,
-				IconId = GetIconIDFromUrl(item.Icon),
-				Description = item.Description,
-				ChatLink = item.ChatLink,
-				Type = item.Type,
-				Amount = 0,
-				MaxAmount = maxAmount,
-				SubType = item.Details.Type.Value switch
-				{
-					ItemTrinketType.Accessory => SubType.Accessory,
-					ItemTrinketType.Amulet => SubType.Amulet,
-					ItemTrinketType.Ring => SubType.Ring,
-					_ => SubType.Unknown
-				}
-			});
-		}
-
-		private void AddLegendaryBack(ItemBack item, int maxAmount)
-		{
-			other.Add(new OtherItem()
-			{
-				Id = item.Id,
-				Name = item.Name,
-				IconId = GetIconIDFromUrl(item.Icon),
-				Description = item.Description,
-				ChatLink = item.ChatLink,
-				Type = item.Type,
-				Amount = 0,
-				MaxAmount = maxAmount,
-				SubType = SubType.Back
-			});
-		}
-
-		private void AddLegendaryUpgrade(ItemUpgradeComponent item, int maxAmount)
-		{
-			other.Add(new OtherItem()
-			{
-				Id = item.Id,
-				Name = item.Name,
-				IconId = GetIconIDFromUrl(item.Icon),
-				Description = item.Description,
-				ChatLink = item.ChatLink,
-				Type = item.Type,
-				Amount = 0,
-				MaxAmount = maxAmount,
-				SubType = item.Details.Type.Value switch { ItemUpgradeComponentType.Sigil => SubType.Sigil, ItemUpgradeComponentType.Rune => SubType.Rune, _ => SubType.Unknown }
-			});
 		}
 
 		private List<int> variantSkinIds = new List<int>
@@ -193,9 +71,9 @@ namespace LegendaryArmory.Services
 		};
 
 
-		private void AddLegendaryVariant(SkinWeapon skin)
+		/*private void AddLegendaryVariant(SkinWeapon skin)
 		{
-			weapons.Add(new WeaponItem()
+			LegendaryItems.Add(new ItemWeapon()
 			{
 				Id = skin.Id,
 				Name = skin.Name,
@@ -209,32 +87,17 @@ namespace LegendaryArmory.Services
 				Generation = 3,
 				Variant = true
 			});
-		}
+		}*/
 
-		public void UpdateAmounts(Gw2ApiManager apiManager)
+		public void UpdateAmounts(Gw2ApiManager apiManager, ArmoryView view)
 		{
 			try
 			{
 				if (apiManager.HasPermissions(new[] { TokenPermission.Account, TokenPermission.Inventories, TokenPermission.Unlocks }))
 				{
 					Logger.Debug("Getting owned Legendaries from API");
-					List<AccountLegendaryArmory> owned = (List<AccountLegendaryArmory>)apiManager.Gw2ApiClient.V2.Account.LegendaryArmory.GetAsync().Result;
-					foreach (var current in owned)
-					{
-						foreach (var item in weapons.Where(_ => _.Id == current.Id))
-						{
-							item.Amount = current.Count;
-						}
-						foreach (var item in armors.Where(_ => _.Id == current.Id))
-						{
-							item.Amount = current.Count;
-						}
-						foreach (var item in other.Where(_ => _.Id == current.Id))
-						{
-							item.Amount = current.Count;
-						}
-					}
-					Logger.Debug("Got {legendaresCount} owned Legendaries from API.", owned.Count);
+					OwnedLegendaries = apiManager.Gw2ApiClient.V2.Account.LegendaryArmory.GetAsync().Result.ToList();
+					Logger.Debug("Got {legendaresCount} owned Legendaries from API.", OwnedLegendaries.Count);
 				}
 				else
 				{
@@ -244,6 +107,7 @@ namespace LegendaryArmory.Services
 			catch (Exception e) {
 				Logger.Warn(e, "Failed to update owned Legendaries.");	
 			}
+			view.UpdateAmounts(OwnedLegendaries);
 		}
 
 		private List<string> weaponTypeOrder = new List<string>
@@ -251,50 +115,14 @@ namespace LegendaryArmory.Services
 			"Sword","Hammer","LongBow","ShortBow","Axe","Dagger","Greatsword","Mace","Pistol","Rifle","Scepter","Staff","Focus","Torch","Warhorn","Shield","Harpoon", "Speargun","Trident"
 		};
 
-		public List<(string, WeaponItem)> GetWeapons()
-		{
-			List <(string, WeaponItem)> result = new List<(string, WeaponItem)>();
-			foreach (var item in weapons)
-			{
-				result.Add((item.Generation.ToString(), item));
-			}
-			return result.OrderBy(_ => weaponTypeOrder.IndexOf(_.Item1)).ToList();
-		}
-
-		public List<(string, ArmorItem)> GetArmors()
-		{
-			List<(string, ArmorItem)> result = new List<(string, ArmorItem)>();
-			foreach (var item in armors)
-			{
-				result.Add((item.SlotType.ToString(), item));
-			}
-			return result;
-		}
-
-		public List<(string, OtherItem)> GetOthers(bool detailed = false)
-		{
-			List<(string, OtherItem)> result = new List<(string, OtherItem)>();
-			foreach (var item in other)
-			{
-				if (detailed)
-				{
-					result.Add((item.SubType.ToString(), item));
-				}
-				else
-				{
-					result.Add((item.Type.ToString(), item));
-				}
-			}
-			return result;
-		}
-
-		private int GetIconIDFromUrl(string url)
+		internal AsyncTexture2D GetIconFromUrl(string url)
 		{
 			char[] delimiters = { '.', '/' };
 			String[] splitUrl = url.Split(delimiters);
 			int assetId = int.Parse(splitUrl[splitUrl.Length - 2]);
-			return assetId;
+			return GameService.Content.DatAssetCache.GetTextureFromAssetId(assetId);
 		}
+
 		public void Dispose()
 		{
 			

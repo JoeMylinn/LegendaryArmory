@@ -152,19 +152,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LegendaryArmory.cs" />
-    <Compile Include="Models\AquisitionType.cs" />
-    <Compile Include="Models\ArmorItem.cs" />
-    <Compile Include="Models\LegendaryItem.cs" />
-    <Compile Include="Models\OtherItem.cs" />
-    <Compile Include="Models\SubType.cs" />
-    <Compile Include="Models\WeaponItem.cs" />
     <Compile Include="Services\ArmoryService.cs" />
-    <Compile Include="UI\ArmorView.cs" />
     <Compile Include="UI\ArmoryView.cs" />
-    <Compile Include="UI\ItemView.cs" />
+    <Compile Include="UI\FilterFlowPanel.cs" />
     <Compile Include="UI\LegendaryImage.cs" />
-    <Compile Include="UI\MiscView.cs" />
-    <Compile Include="UI\WeaponView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AsyncClipboardService, Version=1.7.1.0, Culture=neutral, processorArchitecture=MSIL">
