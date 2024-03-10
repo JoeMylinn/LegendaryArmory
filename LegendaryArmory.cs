@@ -61,7 +61,7 @@ namespace LegendaryArmory
 			_armoryWindow = new StandardWindow(
 				GameService.Content.DatAssetCache.GetTextureFromAssetId(155985),
 				new Rectangle(40, 26, 913, 691),
-				new Rectangle(70, 36, 839, 605))
+				new Rectangle(70, 36, 839, 635))
 
 			{
 				Parent = GameService.Graphics.SpriteScreen,

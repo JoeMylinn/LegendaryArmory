@@ -16,6 +16,7 @@ namespace LegendaryArmory.Services
 	{
 		private static Logger Logger = Logger.GetLogger<ArmoryService>();
 
+		public List<Gw2Sharp.WebApi.V2.Models.LegendaryArmory> legendaryIds = new List<Gw2Sharp.WebApi.V2.Models.LegendaryArmory>();
 		public List<Item> LegendaryItems = new List<Item>();
 		public List<AccountLegendaryArmory> OwnedLegendaries = new List<AccountLegendaryArmory>();
 		public List<KeyValuePair<String, ProfessionWeapon>> ProfessionWeapons = new List<KeyValuePair<String, ProfessionWeapon>>();
@@ -27,7 +28,6 @@ namespace LegendaryArmory.Services
 
 		private void InitLegendaries (IGw2WebApiV2Client apiClient) 
 		{
-			List<Gw2Sharp.WebApi.V2.Models.LegendaryArmory> legendaryIds = new List<Gw2Sharp.WebApi.V2.Models.LegendaryArmory>();
 			try
 			{
 				Logger.Debug("Getting Legendaries from API.");
@@ -42,12 +42,15 @@ namespace LegendaryArmory.Services
 			}
 			LegendaryItems.Sort((a, b) => { return a.Id.CompareTo(b.Id); });
 
+
 			//TODO: Figure out proper sorting
 			/*foreach (Skin variant in variants)
 			{
 				AddLegendaryVariant((SkinWeapon)variant);
-			}
-*/
+			}*/
+
+			//Workaround for Relics not properly Modeled by GW2Sharp
+			LegendaryItems.Find(_ => _.Id == 101582).Type = ItemType.UpgradeComponent;
 		}
 
 		private List<int> variantSkinIds = new List<int>
@@ -104,8 +107,9 @@ namespace LegendaryArmory.Services
 					Logger.Warn("Skipping getting owned Legendaries, API Key missing permissions.");
 				}
 			}
-			catch (Exception e) {
-				Logger.Warn(e, "Failed to update owned Legendaries.");	
+			catch (Exception e)
+			{
+				Logger.Warn(e, "Failed to update owned Legendaries.");
 			}
 			view.UpdateAmounts(OwnedLegendaries);
 		}

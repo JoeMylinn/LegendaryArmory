@@ -1,10 +1,12 @@
-﻿using Blish_HUD.Controls;
+﻿using Blish_HUD;
+using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
 using Gw2Sharp;
 using Gw2Sharp.WebApi.V2.Models;
 using LegendaryArmory.Services;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace LegendaryArmory.UI
@@ -112,6 +114,7 @@ namespace LegendaryArmory.UI
 			var allWeaponsMenuItem = weaponMenu.AddMenuItem("All Types");
 			foreach (var category in LegendaryImages.Where(_ => _.Item2.Type == ItemType.Weapon).SelectMany(_ => _.Item2.WieldType).Distinct())
 			{
+				if (category == ProfessionWeaponFlag.Aquatic) continue;
 				var subMenu = weaponMenu.AddMenuItem(category.ToString());
 				subMenu.Click += delegate
 				{
@@ -120,8 +123,6 @@ namespace LegendaryArmory.UI
 					itemView.Filter(item => item.Type == ItemType.Weapon && item.WieldType.Contains(category));
 				};
 			}
-
-			allWeaponsMenuItem.Select();
 
 			var allArmorsMenuItem = armorMenu.AddMenuItem("All Weights");
 			foreach (var category in LegendaryImages.Where(_ => _.Item2.Type == ItemType.Armor).Select(_ => _.Item2.WeightClass).Distinct().ToList())
@@ -170,6 +171,8 @@ namespace LegendaryArmory.UI
 				itemView.Filter(item => item.Type != ItemType.Armor && item.Type != ItemType.Weapon);
 			};
 
+			allWeaponsMenuItem.Select();
+			itemView.Filter(item => item.Type == ItemType.Weapon);
 			base.Build(buildPanel);
 		}
 
@@ -182,7 +185,8 @@ namespace LegendaryArmory.UI
 				Width = 64,
 				Height = 64,
 				Opacity = (float)0.3,
-				BasicTooltipText = item.Name + " - ID: " +  item.Id.ToString(),
+				BasicTooltipText = item.Name,
+				MaxAmount = armoryService.legendaryIds.Find(_ => _.Id == item.Id).MaxCount 
 			};
 
 			switch(item.Type.ToEnum())
@@ -209,7 +213,7 @@ namespace LegendaryArmory.UI
 			{
 				var categoryPanel = new FlowPanel()
 				{
-					Title = gen.ToString(),
+					Title = "Generation "  + gen.ToString(),
 					Parent = buildPanel,
 					Width = buildPanel.ContentRegion.Width - 24,
 					HeightSizingMode = SizingMode.AutoSize,
@@ -225,7 +229,8 @@ namespace LegendaryArmory.UI
 
 			//Armor Categories
 			var armors = LegendaryImages.Where(_ => _.Item2.Type == ItemType.Armor).Select(_ => _.Item2).ToList();
-			foreach (var slot in armors.Select(_ => _.Slot).Distinct().ToList())
+			//Custom sort order, change to custom service later
+			foreach (var slot in armors.Select(_ => _.Slot).Distinct().ToList().OrderBy(_ => "HSCGLB".IndexOf(_.ToString()[0])))
 			{
 				var categoryPanel = new FlowPanel()
 				{

@@ -14,6 +14,8 @@ namespace LegendaryArmory.UI
 	{
 		private int _amount;
 
+		private int _maxAmount;
+
 		private int _generation;
 
 		private ItemType _type;
@@ -29,6 +31,15 @@ namespace LegendaryArmory.UI
 			set{
 				SetProperty(ref _amount, value);
 				Opacity = (float)(_amount > 0 ? 1 : 0.3);
+			}
+		}
+
+		public int MaxAmount
+		{
+			get => _amount;
+			set
+			{
+				SetProperty(ref _maxAmount, value);
 			}
 		}
 
@@ -71,6 +82,12 @@ namespace LegendaryArmory.UI
 		{
 			base.Paint(spriteBatch, bounds);
 			DrawBorder(spriteBatch, bounds);
+
+			var text = _amount.ToString() + "/" + _maxAmount.ToString();
+			var dest = new Rectangle(0, -2, bounds.Width, bounds.Height);
+			spriteBatch.DrawStringOnCtrl(this, text, _font, dest,
+										 new(255, 247, 169), false, true, 2,
+										 HorizontalAlignment.Center, VerticalAlignment.Bottom);
 		}
 
 		private void DrawBorder(SpriteBatch spriteBatch, Rectangle bounds)
