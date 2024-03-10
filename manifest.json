@@ -1,0 +1,34 @@
+{
+  "name": "Legendary Armory",
+  "version": "0.1.0",
+  "namespace": "joe.legendaryarmory",
+  "package": "Legendary Armory.dll",
+  "manifest_version": 1,
+
+  "description": "Adds an overview of your unlocked Legendary Items.",
+  "dependencies": {
+    "bh.blishhud": ">=1.0.0"
+  },
+  "url": "https://github.com/JoeMylinn",
+  "contributors": [
+    {
+      "name": "Joe",
+      "username": "Joe.1839",
+      "url": "https://github.com/JoeMylinn"
+    }
+  ],
+  "api_permissions": {
+    "account": {
+      "optional": false,
+      "details": "Always required."
+    },
+    "inventories": {
+      "optional": false,
+      "details": "Required to see which Legendaries are unlocked."
+    },
+    "unlocks": {
+      "optional": false,
+      "details": "Required to see which Legendaries are unlocked."
+    }
+  }
+}
