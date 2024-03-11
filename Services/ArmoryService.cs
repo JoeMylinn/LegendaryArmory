@@ -4,11 +4,9 @@ using Blish_HUD.Modules.Managers;
 using Gw2Sharp.WebApi.V2;
 using Gw2Sharp.WebApi.V2.Models;
 using LegendaryArmory.UI;
-using SharpDX.Direct2D1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel.Configuration;
 
 namespace LegendaryArmory.Services
 {
@@ -35,8 +33,9 @@ namespace LegendaryArmory.Services
 				LegendaryItems = (List<Item>)apiClient.Items.ManyAsync(legendaryIds.Select(item => item.Id)).Result;
 				WeaponVariants = apiClient.Skins.ManyAsync(variantSkinIds).Result.ToList();
 				ProfessionWeapons = apiClient.Professions.AllAsync().Result.ToList().SelectMany(_ => _.Weapons).ToList();
-				
-			} catch (Exception ex)
+
+			}
+			catch (Exception ex)
 			{
 				Logger.Warn(ex, "Failed to get Legendaries.");
 			}
@@ -50,7 +49,11 @@ namespace LegendaryArmory.Services
 			}*/
 
 			//Workaround for Relics not properly Modeled by GW2Sharp
-			LegendaryItems.Find(_ => _.Id == 101582).Type = ItemType.UpgradeComponent;
+			var relic = LegendaryItems.Find(_ => _.Id == 101582);
+			if(relic != null)
+			{
+				relic.Type = ItemType.UpgradeComponent;
+			}
 		}
 
 		private List<int> variantSkinIds = new List<int>

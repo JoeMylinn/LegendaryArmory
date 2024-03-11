@@ -104,7 +104,6 @@ namespace LegendaryArmory
 			// Unload here
 			_armoryCornerIcon?.Dispose();
 			_armoryWindow?.Dispose();
-			_armoryService = null;
 			_armoryView?.DoUnload();
 			// All static members must be manually unset
 		}
