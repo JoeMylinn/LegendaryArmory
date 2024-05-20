@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework;
 using MonoGame.Extended.VectorDraw;
 using System;
 using System.ComponentModel.Composition;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LegendaryArmory
@@ -26,6 +27,8 @@ namespace LegendaryArmory
 		private StandardWindow _armoryWindow;
 		private ArmoryView _armoryView;
 		private ArmoryService _armoryService;
+		private CancellationTokenSource cTS;
+		private CancellationToken cT;
 
 		internal SettingsManager SettingsManager => this.ModuleParameters.SettingsManager;
 		internal ContentsManager ContentsManager => this.ModuleParameters.ContentsManager;
@@ -41,12 +44,11 @@ namespace LegendaryArmory
 
 		protected override void Initialize()
 		{
-			
-		}
+			cTS = new CancellationTokenSource();
+			cT = cTS.Token;
 
-		protected override async Task LoadAsync()
-		{
-			_armoryService = new ArmoryService(Gw2ApiManager);
+
+			_armoryService = new ArmoryService();
 
 			GameService.Content.DatAssetCache.TryGetTextureFromAssetId(1078536, out AsyncTexture2D chestTexture);
 
@@ -68,29 +70,47 @@ namespace LegendaryArmory
 				Title = this.Name,
 				Location = new Point(300, 300),
 				SavesPosition = true,
+				Emblem = ContentsManager.GetTexture("1824203.png"),
 				Id = $"{nameof(LegendaryArmory)}_Main_Window"
-			};
-
-
-			_armoryView = new ArmoryView(_armoryService);
-
-			_armoryCornerIcon.Click += delegate 
-			{
-				_armoryService.UpdateAmounts(Gw2ApiManager, _armoryView);
-				_armoryWindow.ToggleWindow(_armoryView); 
-			};
-
-			Gw2ApiManager.SubtokenUpdated += delegate
-			{
-				_armoryService.UpdateAmounts(Gw2ApiManager, _armoryView);
 			};
 		}
 
-		protected override void OnModuleLoaded(EventArgs e)
+		protected override async Task LoadAsync()
 		{
+			_armoryService.InitLegendaries(Gw2ApiManager.Gw2ApiClient.V2);
+			_armoryView = new ArmoryView(_armoryService);
+			UpdateAmountsRepeat();
+		}
+
+		protected override async void OnModuleLoaded(EventArgs e)
+		{
+			_armoryCornerIcon.Click += delegate
+			{
+				_armoryWindow.ToggleWindow(_armoryView);
+			};
+
+			Gw2ApiManager.SubtokenUpdated += async delegate
+			{
+				await Task.Run(() => { _armoryService.UpdateAmounts(Gw2ApiManager, _armoryView); });
+			};
+
 
 			// Base handler must be called
 			base.OnModuleLoaded(e);
+		}
+
+		private async void UpdateAmountsRepeat()
+		{
+			await Task.Run(() => { _armoryService.UpdateAmounts(Gw2ApiManager, _armoryView); });
+			try
+			{
+				await Task.Delay(1000 * 60 * 5).ContinueWith(t =>
+				{
+					cT.ThrowIfCancellationRequested();
+					UpdateAmountsRepeat();
+				}, cT);
+			}
+			catch (OperationCanceledException ex) { }
 		}
 
 		protected override void Update(GameTime gameTime)
@@ -101,11 +121,14 @@ namespace LegendaryArmory
 		/// <inheritdoc />
 		protected override void Unload()
 		{
+			cTS.Cancel();
+			cTS.Dispose();
 			// Unload here
 			_armoryCornerIcon?.Dispose();
 			_armoryWindow?.Dispose();
 			_armoryView?.DoUnload();
 			// All static members must be manually unset
+			_armoryService = null;
 		}
 
 	}

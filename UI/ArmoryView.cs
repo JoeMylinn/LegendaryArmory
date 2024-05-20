@@ -3,11 +3,13 @@ using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
 using Gw2Sharp;
 using Gw2Sharp.WebApi.V2.Models;
+using LegendaryArmory.Helper;
 using LegendaryArmory.Services;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace LegendaryArmory.UI
 {
@@ -177,7 +179,7 @@ namespace LegendaryArmory.UI
 		}
 
 		private LegendaryImage ImageFromItem(Item item)
-		{ 
+		{
 			LegendaryImage image = new LegendaryImage()
 			{
 				Type = item.Type,
@@ -185,7 +187,6 @@ namespace LegendaryArmory.UI
 				Width = 64,
 				Height = 64,
 				Opacity = (float)0.3,
-				BasicTooltipText = item.Name,
 				MaxAmount = armoryService.legendaryIds.Find(_ => _.Id == item.Id).MaxCount 
 			};
 
@@ -320,6 +321,28 @@ namespace LegendaryArmory.UI
 			foreach (var item in owned) {
 				foreach(var img in LegendaryImages.Where(_ => _.Item1 == item.Id)) {
 					img.Item2.Amount = item.Count;
+				}
+			}
+
+			foreach(var img in LegendaryImages) {
+				var item = armoryService.LegendaryItems.Where(_ => _.Id == img.Item1).First();
+				switch (item.Type.ToEnum())
+				{
+					case ItemType.Weapon:
+						img.Item2.Tooltip = TooltipHelper.CreateTooltip((ItemWeapon)item, img.Item2);
+						break;
+					case ItemType.Armor:
+						img.Item2.Tooltip = TooltipHelper.CreateTooltip((ItemArmor)item, img.Item2);
+						break;
+					case ItemType.Back:
+						img.Item2.Tooltip = TooltipHelper.CreateTooltip((ItemBack)item, img.Item2);
+						break;
+					case ItemType.Trinket:
+						img.Item2.Tooltip = TooltipHelper.CreateTooltip((ItemTrinket)item, img.Item2);
+						break;
+					default:
+						img.Item2.Tooltip = TooltipHelper.CreateTooltip(item, img.Item2);
+						break;
 				}
 			}
 		} 

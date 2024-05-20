@@ -151,6 +151,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\TooltipHelper.cs" />
     <Compile Include="LegendaryArmory.cs" />
     <Compile Include="Services\ArmoryService.cs" />
     <Compile Include="UI\ArmoryView.cs" />
@@ -327,6 +328,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ref\_instructions.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ref\1824203.png" />
+    <Content Include="ref\construction.jpg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

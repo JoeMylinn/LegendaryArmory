@@ -36,7 +36,7 @@ namespace LegendaryArmory.UI
 
 		public int MaxAmount
 		{
-			get => _amount;
+			get => _maxAmount;
 			set
 			{
 				SetProperty(ref _maxAmount, value);

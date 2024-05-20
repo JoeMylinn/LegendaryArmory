@@ -7,6 +7,7 @@ using LegendaryArmory.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LegendaryArmory.Services
 {
@@ -19,12 +20,12 @@ namespace LegendaryArmory.Services
 		public List<AccountLegendaryArmory> OwnedLegendaries = new List<AccountLegendaryArmory>();
 		public List<KeyValuePair<String, ProfessionWeapon>> ProfessionWeapons = new List<KeyValuePair<String, ProfessionWeapon>>();
 		public List<Skin> WeaponVariants = new List<Skin>();
-		public ArmoryService(Gw2ApiManager apiManager) 
+		public ArmoryService() 
 		{
-				InitLegendaries(apiManager.Gw2ApiClient.V2);	
+				
 		}
 
-		private void InitLegendaries (IGw2WebApiV2Client apiClient) 
+		public void InitLegendaries (IGw2WebApiV2Client apiClient) 
 		{
 			try
 			{
@@ -33,12 +34,12 @@ namespace LegendaryArmory.Services
 				LegendaryItems = (List<Item>)apiClient.Items.ManyAsync(legendaryIds.Select(item => item.Id)).Result;
 				WeaponVariants = apiClient.Skins.ManyAsync(variantSkinIds).Result.ToList();
 				ProfessionWeapons = apiClient.Professions.AllAsync().Result.ToList().SelectMany(_ => _.Weapons).ToList();
-
 			}
 			catch (Exception ex)
 			{
 				Logger.Warn(ex, "Failed to get Legendaries.");
 			}
+			
 			LegendaryItems.Sort((a, b) => { return a.Id.CompareTo(b.Id); });
 
 
@@ -95,14 +96,17 @@ namespace LegendaryArmory.Services
 			});
 		}*/
 
-		public void UpdateAmounts(Gw2ApiManager apiManager, ArmoryView view)
+		public async void UpdateAmounts(Gw2ApiManager apiManager, ArmoryView view)
 		{
 			try
 			{
 				if (apiManager.HasPermissions(new[] { TokenPermission.Account, TokenPermission.Inventories, TokenPermission.Unlocks }))
 				{
 					Logger.Debug("Getting owned Legendaries from API");
-					OwnedLegendaries = apiManager.Gw2ApiClient.V2.Account.LegendaryArmory.GetAsync().Result.ToList();
+					await Task.Run(() =>
+					{
+						OwnedLegendaries = apiManager.Gw2ApiClient.V2.Account.LegendaryArmory.GetAsync().Result.ToList();
+					});
 					Logger.Debug("Got {legendaresCount} owned Legendaries from API.", OwnedLegendaries.Count);
 				}
 				else
