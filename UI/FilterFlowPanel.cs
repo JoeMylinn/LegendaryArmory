@@ -1,10 +1,6 @@
 ﻿using Blish_HUD.Controls;
-using Blish_HUD.Controls.Resources;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LegendaryArmory.UI
 {
@@ -12,11 +8,12 @@ namespace LegendaryArmory.UI
 	{
 		public void Filter(Func<LegendaryImage, bool> filter)
 		{
-			foreach(FlowPanel panel in Children.Where(_ => _.GetType() == typeof(FlowPanel)))
+			foreach(var control in Children.Where(c => c.GetType() == typeof(FlowPanel)))
 			{
+				var panel = (FlowPanel)control;
 
 				panel.FilterChildren(filter);
-				var hidden = panel.Children.Where(_ => !_.Visible).ToList();
+				var hidden = panel.Children.Where(c => !c.Visible).ToList();
 				if (hidden.Count == panel.Children.Count)
 				{
 					panel.Visible = false;
@@ -26,7 +23,7 @@ namespace LegendaryArmory.UI
 					panel.Visible = true;
 					foreach(var child in hidden)
 					{
-						child.Location = panel.Children.Where(_ => _.Visible).First().Location;
+						child.Location = panel.Children.First(c => c.Visible).Location;
 					}
 				}
 			}

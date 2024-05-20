@@ -33,7 +33,7 @@ namespace LegendaryArmory.Services
 				legendaryIds = apiClient.LegendaryArmory.AllAsync().Result.ToList();
 				LegendaryItems = (List<Item>)apiClient.Items.ManyAsync(legendaryIds.Select(item => item.Id)).Result;
 				WeaponVariants = apiClient.Skins.ManyAsync(variantSkinIds).Result.ToList();
-				ProfessionWeapons = apiClient.Professions.AllAsync().Result.ToList().SelectMany(_ => _.Weapons).ToList();
+				ProfessionWeapons = apiClient.Professions.AllAsync().Result.ToList().SelectMany(p => p.Weapons).ToList();
 			}
 			catch (Exception ex)
 			{
@@ -50,7 +50,7 @@ namespace LegendaryArmory.Services
 			}*/
 
 			//Workaround for Relics not properly Modeled by GW2Sharp
-			var relic = LegendaryItems.Find(_ => _.Id == 101582);
+			var relic = LegendaryItems.Find(i => i.Id == 101582);
 			if(relic != null)
 			{
 				relic.Type = ItemType.UpgradeComponent;
@@ -121,7 +121,7 @@ namespace LegendaryArmory.Services
 			view.UpdateAmounts(OwnedLegendaries);
 		}
 
-		private List<string> weaponTypeOrder = new List<string>
+		private List<string> weaponTypeOrder = new()
 		{
 			"Sword","Hammer","LongBow","ShortBow","Axe","Dagger","Greatsword","Mace","Pistol","Rifle","Scepter","Staff","Focus","Torch","Warhorn","Shield","Harpoon", "Speargun","Trident"
 		};

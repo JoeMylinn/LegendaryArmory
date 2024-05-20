@@ -73,11 +73,6 @@ namespace LegendaryArmory.UI
 
 		private BitmapFont _font = GameService.Content.DefaultFont16;
 
-		public LegendaryImage() : base()
-		{
-			
-		}
-
 		protected override void Paint(SpriteBatch spriteBatch, Rectangle bounds)
 		{
 			base.Paint(spriteBatch, bounds);

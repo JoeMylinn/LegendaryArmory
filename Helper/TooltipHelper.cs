@@ -11,7 +11,7 @@ namespace LegendaryArmory.Helper
 
 		public static Tooltip CreateTooltip(ItemWeapon weapon, LegendaryImage image)
 		{
-			Tooltip tooltip = new() { };
+			Tooltip tooltip = new();
 
 			var img = Title(weapon, image, tooltip);
 
@@ -26,14 +26,14 @@ namespace LegendaryArmory.Helper
 
 			if (weapon.Details.DamageType != "Physical")
 			{
-				var damageType = new Label()
+				_ = new Label()
 				{
 					Parent = tooltip,
 					Top = strength.Top,
 					Left = strength.Right,
 					AutoSizeHeight = true,
 					AutoSizeWidth = true,
-					Text = " (" + weapon.Details.DamageType.ToString() + ")",
+					Text = " (" + weapon.Details.DamageType + ")",
 					Opacity = (float)0.7
 				};
 			}
@@ -68,7 +68,7 @@ namespace LegendaryArmory.Helper
 
 		public static Tooltip CreateTooltip(ItemArmor armor, LegendaryImage image)
 		{
-			Tooltip tooltip = new() { };
+			Tooltip tooltip = new();
 
 			var img = Title(armor, image, tooltip);
 
@@ -110,7 +110,7 @@ namespace LegendaryArmory.Helper
 
 		public static Tooltip CreateTooltip(ItemBack back, LegendaryImage image)
 		{
-			Tooltip tooltip = new() { };
+			Tooltip tooltip = new();
 
 			var img = Title(back, image, tooltip);
 
@@ -143,7 +143,7 @@ namespace LegendaryArmory.Helper
 
 		public static Tooltip CreateTooltip(ItemTrinket trinket, LegendaryImage image)
 		{
-			Tooltip tooltip = new() { };
+			Tooltip tooltip = new();
 
 			var img = Title(trinket, image, tooltip);
 
@@ -173,7 +173,7 @@ namespace LegendaryArmory.Helper
 
 		public static Tooltip CreateTooltip(Item item, LegendaryImage image)
 		{
-			Tooltip tooltip = new() { };
+			Tooltip tooltip = new();
 
 			var img = Title(item, image, tooltip);
 
@@ -217,7 +217,7 @@ namespace LegendaryArmory.Helper
 				Height = 32
 			};
 
-			var name = new Label()
+			_ = new Label()
 			{
 				Parent = tooltip,
 				Top = tooltip.Top + 5,
@@ -290,7 +290,7 @@ namespace LegendaryArmory.Helper
 			return last;
 		}
 
-		private static Label Status(Item item, LegendaryImage image, Tooltip tooltip, Label last)
+		private static Label Status(LegendaryImage image, Tooltip tooltip, Label last)
 		{
 			return new Label()
 			{
@@ -304,27 +304,27 @@ namespace LegendaryArmory.Helper
 			};
 		}
 
-		private static Label Binding(Item item, Tooltip tooltip, Label last)
+		private static void Binding(Item item, Tooltip tooltip, Label last)
 		{
-			return new Label()
+			_ = new Label()
 			{
 				Parent = tooltip,
 				Top = last.Bottom,
 				AutoSizeHeight = true,
 				AutoSizeWidth = true,
-				Text = item.Flags.Where(_ => _.ToString().StartsWith("Account")).First().ToString(),
+				Text = item.Flags.First(flag => flag.ToString()!.StartsWith("Account")),
 			};
 		}
 
-		private static Label End(Item item, LegendaryImage image, Tooltip tooltip, Label last)
+		private static void End(Item item, LegendaryImage image, Tooltip tooltip, Label last)
 		{
 			var level = Level(item, tooltip, last);
 
 			var description = Description(item, tooltip, level);
 
-			var status = Status(item, image, tooltip, description);
+			var status = Status(image, tooltip, description);
 
-			return Binding(item, tooltip, status);
+			Binding(item, tooltip, status);
 		}
 
 	}

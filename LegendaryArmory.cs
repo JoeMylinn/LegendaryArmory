@@ -4,12 +4,9 @@ using Blish_HUD.Controls;
 using Blish_HUD.Modules;
 using Blish_HUD.Modules.Managers;
 using Blish_HUD.Settings;
-using Gw2Sharp.Mumble;
-using Gw2Sharp.WebApi.Render;
 using LegendaryArmory.Services;
 using LegendaryArmory.UI;
 using Microsoft.Xna.Framework;
-using MonoGame.Extended.VectorDraw;
 using System;
 using System.ComponentModel.Composition;
 using System.Threading;
@@ -17,8 +14,8 @@ using System.Threading.Tasks;
 
 namespace LegendaryArmory
 {
-	[Export(typeof(Blish_HUD.Modules.Module))]
-	public class LegendaryArmory : Blish_HUD.Modules.Module
+	[Export(typeof(Module))]
+	public class LegendaryArmory : Module
 	{
 
 		private static readonly Logger Logger = Logger.GetLogger<Module>();
@@ -27,13 +24,13 @@ namespace LegendaryArmory
 		private StandardWindow _armoryWindow;
 		private ArmoryView _armoryView;
 		private ArmoryService _armoryService;
-		private CancellationTokenSource cTS;
-		private CancellationToken cT;
+		private CancellationTokenSource _cTs;
+		private CancellationToken _cT;
 
-		internal SettingsManager SettingsManager => this.ModuleParameters.SettingsManager;
-		internal ContentsManager ContentsManager => this.ModuleParameters.ContentsManager;
-		internal DirectoriesManager DirectoriesManager => this.ModuleParameters.DirectoriesManager;
-		internal Gw2ApiManager Gw2ApiManager => this.ModuleParameters.Gw2ApiManager;
+		internal SettingsManager SettingsManager => ModuleParameters.SettingsManager;
+		internal ContentsManager ContentsManager => ModuleParameters.ContentsManager;
+		internal DirectoriesManager DirectoriesManager => ModuleParameters.DirectoriesManager;
+		internal Gw2ApiManager Gw2ApiManager => ModuleParameters.Gw2ApiManager;
 
 		[ImportingConstructor]
 		public LegendaryArmory([Import("ModuleParameters")] ModuleParameters moduleParameters) : base(moduleParameters) { }
@@ -44,8 +41,8 @@ namespace LegendaryArmory
 
 		protected override void Initialize()
 		{
-			cTS = new CancellationTokenSource();
-			cT = cTS.Token;
+			_cTs = new CancellationTokenSource();
+			_cT = _cTs.Token;
 
 
 			_armoryService = new ArmoryService();
@@ -67,7 +64,7 @@ namespace LegendaryArmory
 
 			{
 				Parent = GameService.Graphics.SpriteScreen,
-				Title = this.Name,
+				Title = Name,
 				Location = new Point(300, 300),
 				SavesPosition = true,
 				Emblem = ContentsManager.GetTexture("1824203.png"),
@@ -104,13 +101,13 @@ namespace LegendaryArmory
 			await Task.Run(() => { _armoryService.UpdateAmounts(Gw2ApiManager, _armoryView); });
 			try
 			{
-				await Task.Delay(1000 * 60 * 5).ContinueWith(t =>
+				await Task.Delay(1000 * 60 * 5).ContinueWith(_ =>
 				{
-					cT.ThrowIfCancellationRequested();
+					_cT.ThrowIfCancellationRequested();
 					UpdateAmountsRepeat();
-				}, cT);
+				}, _cT);
 			}
-			catch (OperationCanceledException ex) { }
+			catch (OperationCanceledException) { }
 		}
 
 		protected override void Update(GameTime gameTime)
@@ -121,8 +118,8 @@ namespace LegendaryArmory
 		/// <inheritdoc />
 		protected override void Unload()
 		{
-			cTS.Cancel();
-			cTS.Dispose();
+			_cTs.Cancel();
+			_cTs.Dispose();
 			// Unload here
 			_armoryCornerIcon?.Dispose();
 			_armoryWindow?.Dispose();

@@ -1,5 +1,4 @@
-﻿using Blish_HUD;
-using Blish_HUD.Controls;
+﻿using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
 using Gw2Sharp;
 using Gw2Sharp.WebApi.V2.Models;
@@ -7,9 +6,7 @@ using LegendaryArmory.Helper;
 using LegendaryArmory.Services;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace LegendaryArmory.UI
 {
@@ -114,7 +111,7 @@ namespace LegendaryArmory.UI
 			};
 
 			var allWeaponsMenuItem = weaponMenu.AddMenuItem("All Types");
-			foreach (var category in LegendaryImages.Where(_ => _.Item2.Type == ItemType.Weapon).SelectMany(_ => _.Item2.WieldType).Distinct())
+			foreach (var category in LegendaryImages.Where(t => t.Item2.Type == ItemType.Weapon).SelectMany(t => t.Item2.WieldType).Distinct())
 			{
 				if (category == ProfessionWeaponFlag.Aquatic) continue;
 				var subMenu = weaponMenu.AddMenuItem(category.ToString());
@@ -127,7 +124,7 @@ namespace LegendaryArmory.UI
 			}
 
 			var allArmorsMenuItem = armorMenu.AddMenuItem("All Weights");
-			foreach (var category in LegendaryImages.Where(_ => _.Item2.Type == ItemType.Armor).Select(_ => _.Item2.WeightClass).Distinct().ToList())
+			foreach (var category in LegendaryImages.Where(t => t.Item2.Type == ItemType.Armor).Select(t => t.Item2.WeightClass).Distinct().ToList())
 			{
 				var subMenu = armorMenu.AddMenuItem(category.ToString());
 				subMenu.Click += delegate
@@ -139,7 +136,7 @@ namespace LegendaryArmory.UI
 			}
 
 			var allOtherMenuItem = otherMenu.AddMenuItem("All Types");
-			foreach (var category in LegendaryImages.Where(_ => _.Item2.Type != ItemType.Armor && _.Item2.Type != ItemType.Weapon).Select(_ => _.Item2.Type).Distinct().ToList())
+			foreach (var category in LegendaryImages.Where(t => t.Item2.Type != ItemType.Armor && t.Item2.Type != ItemType.Weapon).Select(t => t.Item2.Type).Distinct().ToList())
 			{
 				var subMenu = otherMenu.AddMenuItem(category.ToString());
 				subMenu.Click += delegate
@@ -187,7 +184,7 @@ namespace LegendaryArmory.UI
 				Width = 64,
 				Height = 64,
 				Opacity = (float)0.3,
-				MaxAmount = armoryService.legendaryIds.Find(_ => _.Id == item.Id).MaxCount 
+				MaxAmount = armoryService.legendaryIds.Find(a => a.Id == item.Id).MaxCount 
 			};
 
 			switch(item.Type.ToEnum())
@@ -198,8 +195,6 @@ namespace LegendaryArmory.UI
 				case ItemType.Armor:
 					AddArmorValues((ItemArmor)item, image);
 					break;
-				default:
-					break;
 			}
 
 			return image;
@@ -209,8 +204,8 @@ namespace LegendaryArmory.UI
 		{
 			//TODO: Simplify to single repeated function
 			//Weapon Categories
-			var weapons = LegendaryImages.Where(_ => _.Item2.Type == ItemType.Weapon).Select(_ => _.Item2).ToList();
-			foreach (var gen in weapons.Select(_ => _.Generation).Distinct().ToList())
+			var weapons = LegendaryImages.Where(t => t.Item2.Type == ItemType.Weapon).Select(t => t.Item2).ToList();
+			foreach (var gen in weapons.Select(i => i.Generation).Distinct().ToList())
 			{
 				var categoryPanel = new FlowPanel()
 				{
@@ -223,15 +218,15 @@ namespace LegendaryArmory.UI
 					OuterControlPadding = new Vector2(5, 5),
 					ControlPadding = new Vector2(5, 5)
 				};
-				foreach(var weapon in weapons.Where(_ => _.Generation == gen)) { 
+				foreach(var weapon in weapons.Where(i => i.Generation == gen)) { 
 						weapon.Parent = categoryPanel;				
 				}
 			}
 
 			//Armor Categories
-			var armors = LegendaryImages.Where(_ => _.Item2.Type == ItemType.Armor).Select(_ => _.Item2).ToList();
+			var armors = LegendaryImages.Where(t => t.Item2.Type == ItemType.Armor).Select(t => t.Item2).ToList();
 			//Custom sort order, change to custom service later
-			foreach (var slot in armors.Select(_ => _.Slot).Distinct().ToList().OrderBy(_ => "HSCGLB".IndexOf(_.ToString()[0])))
+			foreach (var slot in armors.Select(i => i.Slot).Distinct().ToList().OrderBy(t => "HSCGLB".IndexOf(t.ToString()[0])))
 			{
 				var categoryPanel = new FlowPanel()
 				{
@@ -244,15 +239,15 @@ namespace LegendaryArmory.UI
 					OuterControlPadding = new Vector2(5, 5),
 					ControlPadding = new Vector2(5, 5)
 				};
-				foreach (var armor in armors.Where(_ => _.Slot == slot))
+				foreach (var armor in armors.Where(i => i.Slot == slot))
 				{
 					armor.Parent = categoryPanel;
 				}
 			}
 
 			//Misc Categories
-			var misc = LegendaryImages.Where(_ => _.Item2.Type != ItemType.Weapon && _.Item2.Type != ItemType.Armor).Select(_ => _.Item2).ToList();
-			foreach (var category in misc.Select(_ => _.Type).Distinct().ToList())
+			var misc = LegendaryImages.Where(t => t.Item2.Type != ItemType.Weapon && t.Item2.Type != ItemType.Armor).Select(t => t.Item2).ToList();
+			foreach (var category in misc.Select(i => i.Type).Distinct().ToList())
 			{
 				var categoryPanel = new FlowPanel()
 				{
@@ -265,7 +260,7 @@ namespace LegendaryArmory.UI
 					OuterControlPadding = new Vector2(5, 5),
 					ControlPadding = new Vector2(5, 5)
 				};
-				foreach (var item in misc.Where(_ => _.Type == category))
+				foreach (var item in misc.Where(i => i.Type == category))
 				{
 					item.Parent = categoryPanel;
 				}
@@ -298,7 +293,7 @@ namespace LegendaryArmory.UI
 				weapon = "Spear";
 			}
 			List <ProfessionWeaponFlag> result = new List<ProfessionWeaponFlag>();
-			foreach (var flags in armoryService.ProfessionWeapons.Where(_ => _.Key.Equals(weapon, System.StringComparison.OrdinalIgnoreCase)).Select(_ => _.Value.Flags))
+			foreach (var flags in armoryService.ProfessionWeapons.Where(p => p.Key.Equals(weapon, System.StringComparison.OrdinalIgnoreCase)).Select(p => p.Value.Flags))
 			{
 				foreach (var flag in flags)
 				{
@@ -319,13 +314,13 @@ namespace LegendaryArmory.UI
 		public void UpdateAmounts(List<AccountLegendaryArmory> owned)
 		{
 			foreach (var item in owned) {
-				foreach(var img in LegendaryImages.Where(_ => _.Item1 == item.Id)) {
+				foreach(var img in LegendaryImages.Where(t => t.Item1 == item.Id)) {
 					img.Item2.Amount = item.Count;
 				}
 			}
 
 			foreach(var img in LegendaryImages) {
-				var item = armoryService.LegendaryItems.Where(_ => _.Id == img.Item1).First();
+				var item = armoryService.LegendaryItems.First(i => i.Id == img.Item1);
 				switch (item.Type.ToEnum())
 				{
 					case ItemType.Weapon:
