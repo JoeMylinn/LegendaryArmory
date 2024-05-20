@@ -91,16 +91,16 @@ namespace LegendaryArmory.UI
 			int lineWidth = 2;
 			Color color = new Color(136, 79, 217);
 			// Top-Left to Top-Right
-			spriteBatch.DrawOnCtrl(this, ContentService.Textures.Pixel, new Rectangle(bounds.X, bounds.Y, bounds.Width, lineWidth), color);
+			spriteBatch.DrawOnCtrl(this, ContentService.Textures.Pixel, new Rectangle(bounds.X, bounds.Y, bounds.Width - lineWidth, lineWidth), color);
 
 			// Top-Left to Bottom-Left
-			spriteBatch.DrawOnCtrl(this, ContentService.Textures.Pixel, new Rectangle(bounds.X, bounds.Y, lineWidth, bounds.Height), color);
+			spriteBatch.DrawOnCtrl(this, ContentService.Textures.Pixel, new Rectangle(bounds.X, bounds.Y + lineWidth, lineWidth, bounds.Height - lineWidth), color);
 
 			// Bottom-Left to Bottom-Right
-			spriteBatch.DrawOnCtrl(this, ContentService.Textures.Pixel, new Rectangle(bounds.X, bounds.Y + bounds.Height - lineWidth, bounds.Width, lineWidth), color);
+			spriteBatch.DrawOnCtrl(this, ContentService.Textures.Pixel, new Rectangle(bounds.X + lineWidth, bounds.Y + bounds.Height - lineWidth, bounds.Width - lineWidth, lineWidth), color);
 
 			// Top-Right to Bottom-Right
-			spriteBatch.DrawOnCtrl(this, ContentService.Textures.Pixel, new Rectangle(bounds.X + bounds.Width - lineWidth, bounds.Y, lineWidth, bounds.Height), color);
+			spriteBatch.DrawOnCtrl(this, ContentService.Textures.Pixel, new Rectangle(bounds.X + bounds.Width - lineWidth, bounds.Y, lineWidth, bounds.Height - lineWidth), color);
 		}
 	}
 }
