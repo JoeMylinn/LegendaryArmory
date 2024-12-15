@@ -1,0 +1,733 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name=":83162" xml:space="preserve"> 
+    <value>Crafted from the finest silks, these vestments are a symbol not only of sheer strength but also quick-witted bravery and grit. They know their way around the streets of Battle of Khylo here and back again.</value>
+    <comment>Ardent Glorious Armguards</comment>
+  </data>  <data name=":93105" xml:space="preserve"> 
+    <value>The ring was fixed on his left hand, a reminder of the battle days before. While they held Stonemist Castle, it could be minutes until their enemy appeared at the front gate. There was no time for mourning.</value>
+    <comment>Conflux</comment>
+  </data>  <data name=":80111" xml:space="preserve"> 
+    <value>These vestments are imbued with the power of a crystalline heart, once carried through an abandoned prison to its final resting place. It is exemplary of the wearer's tenacity in the face of darkness.</value>
+    <comment>Perfected Envoy Gloves</comment>
+  </data>  <data name=":72713" xml:space="preserve"> 
+    <value>"Remember: the blue stuff is the Alchemical Catalyst, and the red stuff is the Transcendent Energy. Don't drink either of them. And whatever you do, don't drop this thing."</value>
+    <comment>HOPE</comment>
+  </data>  <data name=":83036" xml:space="preserve"> 
+    <value>"They never come back whole. Maybe they're only half-remembered..."</value>
+    <comment>Triumphant Hero's Raiment</comment>
+  </data>  <data name=":89094" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Mistforged Glorious Hero's Legguards</comment>
+  </data>  <data name=":84546" xml:space="preserve"> 
+    <value>Crafted from the finest silks, these vestments are a symbol not only of sheer strength but also quick-witted bravery and grit. They know their way around the streets of Battle of Khylo here and back again.</value>
+    <comment>Ardent Glorious Leggings</comment>
+  </data>  <data name=":80384" xml:space="preserve"> 
+    <value>This armor is worn only by those who helped defeat Xera and silence the White Mantle in the depths of the Forsaken Thicket. When it catches the sun just right, it is a beacon of hope in a cruel world.</value>
+    <comment>Perfected Envoy Helmet</comment>
+  </data>  <data name=":30698" xml:space="preserve"> 
+    <value>Casters and archivists alike worship the iridescent glow that the Bifrost emits. Although the source of its magic is unknown, its luminous aura may hint of realms bygone—tucked away in The Mists.</value>
+    <comment>The Bifrost</comment>
+  </data>  <data name=":101570" xml:space="preserve"> 
+    <value>"Flawless blend of leathers and textiles with well-placed hardened armor pieces allowing for rapid movement with ample protection." —Lyhr, Facet of Logic
+
+"Aye. Looks sinister, too. In a good way." —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Medium Gloves</comment>
+  </data>  <data name=":77474" xml:space="preserve"> 
+    <value>A handful of warriors know what it's like to bask in the effervescent glow of a fresh victory—sweat dripping from their brow, voice raw. Only the bravest ascend to such glory.</value>
+    <comment>The Ascension</comment>
+  </data>  <data name=":30686" xml:space="preserve"> 
+    <value>The Dreamer is as mystifying as it is perplexing, for such a creature doesn't exist within the known world. It is quite popular among the Skritt, though, who idolize its colorful...prowess.</value>
+    <comment>The Dreamer</comment>
+  </data>  <data name=":87687" xml:space="preserve"> 
+    <value>When Grenth's powers were raw and new, he crafted a weapon more sinister than he intended. Verdarach summons victims of horrific battles as vengeful wraiths, eager to conscript the newly slain.</value>
+    <comment>Verdarach</comment>
+  </data>  <data name=":83921" xml:space="preserve"> 
+    <value>This suit of armor is melded from the helms of the wearer's opponents, a reminder of the battles won. There's something bittersweet about the way it smells - like clashing swords and sweaty palms.</value>
+    <comment>Ardent Glorious Plate Helm</comment>
+  </data>  <data name=":82670" xml:space="preserve"> 
+    <value>This garb is the perfect blend of lightweight and sturdy, ideal for the sneakiest saboteur. Their enemies may cry foul play, but I assure you, only those with a swift foot possess such finery.</value>
+    <comment>Ardent Glorious Brigandine</comment>
+  </data>  <data name=":80254" xml:space="preserve"> 
+    <value>This armor is worn only by those who helped defeat Xera and silence the White Mantle in the depths of the Forsaken Thicket. When it catches the sun just right, it is a beacon of hope in a cruel world.</value>
+    <comment>Perfected Envoy Breastplate</comment>
+  </data>  <data name=":84748" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Legplates</comment>
+  </data>  <data name=":82180" xml:space="preserve"> 
+    <value>"This sturdy adventuring suit glows with Mist energy. When you wear it inside Obsidian Sanctum, sometimes you catch yourself longing for a forbidden reunion."</value>
+    <comment>Mistforged Triumphant Hero's Faceguard</comment>
+  </data>  <data name=":81839" xml:space="preserve"> 
+    <value>Sharur was retrieved from among the spectral weapons guarding the Source of Orr. Though its lingering corruption is aimless and benign, not even the Artesian Waters could fully cleanse it.</value>
+    <comment>Sharur</comment>
+  </data>  <data name=":91505" xml:space="preserve"> 
+    <value>"I believe that sigils contain fragments, or memories, from the greatest battles in Tyria (world)'s history," Lady Nari wrote. "This one may be our only window into the Battle of the Three Queens."</value>
+    <comment>Legendary Sigil</comment>
+  </data>  <data name=":91048" xml:space="preserve"> 
+    <value>"They killed him. Balthazar. If Lyssa ever learns of this...I don't know what she'd do—what any of them would do. They still claim benevolence, but let's hope they weren't watching too closely."</value>
+    <comment>Vision</comment>
+  </data>  <data name=":80252" xml:space="preserve"> 
+    <value>A symbol of cunning and patience, this garb carries power siphoned from a mysterious beast guarding the Forsaken Thicket. They seem to pulsate, albeit gently, when nearing a ley line.</value>
+    <comment>Perfected Envoy Leggings</comment>
+  </data>  <data name=":30702" xml:space="preserve"> 
+    <value>A Norn ballad recounts a quarrel between the Great Wolf and a serpent who sought to become a Spirit of the Wild: O little snake, do you have what it takes? Howl, howl—open the gate.</value>
+    <comment>Howler</comment>
+  </data>  <data name=":82994" xml:space="preserve"> 
+    <value>"Are we dancing or dueling? It's your turn to pick."</value>
+    <comment>Triumphant Hero's Shoulderguards</comment>
+  </data>  <data name=":83482" xml:space="preserve"> 
+    <value>This exquisite scholarly garb shimmers with The Mists energy. When you wear it through Ruins of Power and unguarded Keep, sometimes you're haunted by nostalgia.</value>
+    <comment>Mistforged Triumphant Hero's Footgear</comment>
+  </data>  <data name=":89101" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Mistforged Glorious Hero's Leggings</comment>
+  </data>  <data name=":101536" xml:space="preserve"> 
+    <value>"Impressive materials. Strong, flexible. Sharp look, too. I reckon you could wear this in battle and then wear it to court." —Lyhr, Facet of Logic
+
+"Clean the blood off first." —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Light Gloves</comment>
+  </data>  <data name=":79802" xml:space="preserve"> 
+    <value>The tiny Quaggan Shooshadoo has made up their mind to follow in your footsteps as a champion of Tyria. You'll need to carry them until their stride is a bit longer.</value>
+    <comment>Shooshadoo</comment>
+  </data>  <data name=":83497" xml:space="preserve"> 
+    <value>"They never come back whole. Maybe they're only half-remembered..."</value>
+    <comment>Triumphant Hero's Leggings</comment>
+  </data>  <data name=":83595" xml:space="preserve"> 
+    <value>Crafted from the finest silks, these vestments are a symbol not only of sheer strength but also quick-witted bravery and grit. They know their way around the streets of Battle of Khylo here and back again.</value>
+    <comment>Ardent Glorious Epaulets</comment>
+  </data>  <data name=":82268" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Shoulderguards</comment>
+  </data>  <data name=":89158" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Mistforged Glorious Hero's Epaulets</comment>
+  </data>  <data name=":91536" xml:space="preserve"> 
+    <value>Lady Nari once wrote that runes are imbued with the memories of ancient warriors and that the effects they grant are remnants of their power.</value>
+    <comment>Legendary Rune</comment>
+  </data>  <data name=":95612" xml:space="preserve"> 
+    <value>The loneliness of this world is terrifying, empty... Who can I confide in now? Can anyone out there hear me...? Do you understand what it's like to hold such power?</value>
+    <comment>Aurene's Tail</comment>
+  </data>  <data name=":82903" xml:space="preserve"> 
+    <value>"Are we dancing or dueling? It's your turn to pick."</value>
+    <comment>Triumphant Hero's Legguards</comment>
+  </data>  <data name=":83087" xml:space="preserve"> 
+    <value>"This sturdy adventuring suit glows with Mist energy. When you wear it inside Obsidian Sanctum, sometimes you catch yourself longing for a forbidden reunion."</value>
+    <comment>Mistforged Triumphant Hero's Shoulderguards</comment>
+  </data>  <data name=":81462" xml:space="preserve"> 
+    <value>Warbringer is made from the salvaged remnants of enemies fallen, emblazoned with swords and spears pulled from still-warm corpses. It is a reminder of battles won and lost—whispers of victory.</value>
+    <comment>Warbringer</comment>
+  </data>  <data name=":82410" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Gauntlets</comment>
+  </data>  <data name=":101535" xml:space="preserve"> 
+    <value>"Impressive materials. Strong, flexible. Sharp look, too. I reckon you could wear this in battle and then wear it to court." —Lyhr, Facet of Logic
+
+"Clean the blood off first." —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Light Shoes</comment>
+  </data>  <data name=":84643" xml:space="preserve"> 
+    <value>This garb is the perfect blend of lightweight and sturdy, ideal for the sneakiest saboteur. Their enemies may cry foul play, but I assure you, only those with a swift foot possess such finery.</value>
+    <comment>Ardent Glorious Cap</comment>
+  </data>  <data name=":89134" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Mistforged Glorious Hero's Wristplates</comment>
+  </data>  <data name=":81206" xml:space="preserve"> 
+    <value>In lieu of written records, some temples of Balthazar kept elaborate weapons depicting the rituals they were used in. Few survived Balthazar's fall, and many were immolated by his loyalist priests.</value>
+    <comment>Flames of War</comment>
+  </data>  <data name=":97099" xml:space="preserve"> 
+    <value>Are people who already have too much power the only ones who want it? Why do they think they need more? This can't be fixed with weapons or magic, it's just...it's just adults panicking or having tantrums.</value>
+    <comment>Aurene's Breath</comment>
+  </data>  <data name=":83729" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Raiment</comment>
+  </data>  <data name=":30684" xml:space="preserve"> 
+    <value>Hlif traveled to the Far Shiverpeaks to challenge Jormag. Near death, she took one last swing at her foe before falling unconscious. She awoke the next morning—her axe encased in an icy dragon's head.</value>
+    <comment>Frostfang</comment>
+  </data>  <data name=":82401" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Cap</comment>
+  </data>  <data name=":80161" xml:space="preserve"> 
+    <value>A symbol of cunning and patience, this garb carries power siphoned from a mysterious beast guarding the Forsaken Thicket. They seem to pulsate, albeit gently, when nearing a ley line.</value>
+    <comment>Perfected Envoy Vambraces</comment>
+  </data>  <data name=":89245" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Mistforged Glorious Hero's Footgear</comment>
+  </data>  <data name=":83308" xml:space="preserve"> 
+    <value>This exquisite scholarly garb shimmers with The Mists energy. When you wear it through Ruins of Power and unguarded Keep, sometimes you're haunted by nostalgia.</value>
+    <comment>Mistforged Triumphant Hero's Epaulets</comment>
+  </data>  <data name=":30697" xml:space="preserve"> 
+    <value>Although the vast, impenetrable Unending Ocean has been left unexplored for a century past, fishermen lingering just outside the expanse often catch glimpses of something magnificent.</value>
+    <comment>Frenzy</comment>
+  </data>  <data name=":97077" xml:space="preserve"> 
+    <value>I can hear Soo-Won. Her voice lingers at the edge of my mind like a memory I've long forgotten—the lightest touch. Bubbling beneath the ocean waves, deep below... Her voice, like a feather against my scales.</value>
+    <comment>Aurene's Wing</comment>
+  </data>  <data name=":90551" xml:space="preserve"> 
+    <value>Explorers venture into The Mists, and sometimes the Mists venture back. Though far less sentient than the Mist-being gw1:Razah, Exordium takes some joy in adapting to its wielder's needs and expectations.</value>
+    <comment>Exordium</comment>
+  </data>  <data name=":83113" xml:space="preserve"> 
+    <value>Crafted from the finest silks, these vestments are a symbol not only of sheer strength but also quick-witted bravery and grit. They know their way around the streets of Battle of Khylo here and back again.</value>
+    <comment>Ardent Glorious Raiment</comment>
+  </data>  <data name=":84181" xml:space="preserve"> 
+    <value>This powerful soldier's armor pulses with The Mists energy. When you wear it on the upper floor of Stonemist Castle, sometimes your chest aches with pride and agony.</value>
+    <comment>Mistforged Triumphant Hero's Pauldrons</comment>
+  </data>  <data name=":84561" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Pauldrons</comment>
+  </data>  <data name=":96221" xml:space="preserve"> 
+    <value>My Vlast's duty and my Glint's destiny wouldn't have existed without my Kralkatorrik's hunger. If that's so, isn't a Prophecies just knowing what must be done and who should do it?</value>
+    <comment>Aurene's Wisdom</comment>
+  </data>  <data name=":80248" xml:space="preserve"> 
+    <value>These vestments are imbued with the power of a crystalline heart, once carried through an abandoned prison to its final resting place. It is exemplary of the wearer's tenacity in the face of darkness.</value>
+    <comment>Perfected Envoy Cowl</comment>
+  </data>  <data name=":101609" xml:space="preserve"> 
+    <value>"Feels nigh impenetrable. But I reckon the look of this alone will send most of your enemies running." —Lyhr, Facet of Logic
+
+"Those who don't run'll just bounce off, eh?" —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Heavy Gauntlets</comment>
+  </data>  <data name=":89167" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Mistforged Glorious Hero's Armguards</comment>
+  </data>  <data name=":82437" xml:space="preserve"> 
+    <value>"Are we dancing or dueling? It's your turn to pick."</value>
+    <comment>Triumphant Hero's Faceguard</comment>
+  </data>  <data name=":95380" xml:space="preserve"> 
+    <value>Pact Commander adventures before we met, and our struggles together—this is the strength from our bond, Aurene Dragon champion.</value>
+    <comment>Prismatic Champion's Regalia</comment>
+  </data>  <data name=":83862" xml:space="preserve"> 
+    <value>"This sturdy adventuring suit glows with Mist energy. When you wear it inside Obsidian Sanctum, sometimes you catch yourself longing for a forbidden reunion."</value>
+    <comment>Mistforged Triumphant Hero's Legguards</comment>
+  </data>  <data name=":96028" xml:space="preserve"> 
+    <value>Taimi doesn't always understand me, but she helps other people understand me since she can hold a conversation with me by herself. Although...I wouldn't miss it if she stopped giving me a squeaky voice.</value>
+    <comment>Aurene's Scale</comment>
+  </data>  <data name=":83394" xml:space="preserve"> 
+    <value>"This—right now—is the rest of your life. Live it well."</value>
+    <comment>Triumphant Hero's Breastplate</comment>
+  </data>  <data name=":82552" xml:space="preserve"> 
+    <value>"This sturdy adventuring suit glows with Mist energy. When you wear it inside Obsidian Sanctum, sometimes you catch yourself longing for a forbidden reunion."</value>
+    <comment>Mistforged Triumphant Hero's Wristplates</comment>
+  </data>  <data name=":83323" xml:space="preserve"> 
+    <value>This suit of armor is melded from the helms of the wearer's opponents, a reminder of the battles won. There's something bittersweet about the way it smells - like clashing swords and sweaty palms.</value>
+    <comment>Ardent Glorious Legplates</comment>
+  </data>  <data name=":84341" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Leggings</comment>
+  </data>  <data name=":30701" xml:space="preserve"> 
+    <value>"I've studied the Krait for some time, but never have I seen anything else quite like that. One of their shamans performed a ritual on one of their dead—undeniably dead—and it was living once again!"</value>
+    <comment>Kraitkin</comment>
+  </data>  <data name=":84176" xml:space="preserve"> 
+    <value>"This—right now—is the rest of your life. Live it well."</value>
+    <comment>Triumphant Hero's Warhelm</comment>
+  </data>  <data name=":84110" xml:space="preserve"> 
+    <value>"Are we dancing or dueling? It's your turn to pick."</value>
+    <comment>Triumphant Hero's Wristplates</comment>
+  </data>  <data name=":89234" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Mistforged Glorious Hero's Shoulderguards</comment>
+  </data>  <data name=":89854" xml:space="preserve"> 
+    <value>Scholars discovered Pharus in Siren's Reef.[wikipedia:sic] All attempts to store and catalog it have failed; if not carried by a hero, it reappears at Dwayna's Reliquary among the other artifacts.</value>
+    <comment>Pharus</comment>
+  </data>  <data name=":30690" xml:space="preserve"> 
+    <value>A relic dating back to the age of the Great Giant, the Juggernaut may be a gift from the gods. When held by a worthy champion, they are cast in a solid sheet of quicksilver.</value>
+    <comment>The Juggernaut</comment>
+  </data>  <data name=":83676" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Wristplates</comment>
+  </data>  <data name=":30700" xml:space="preserve"> 
+    <value>When Cutha woke, he was greeted by sounds of panic and flame. He ran to the window just in time to witness a Dragon perch on a nearby rooftop. "Rodgort," they whispered. "Rodgort is my name."</value>
+    <comment>Rodgort</comment>
+  </data>  <data name=":83094" xml:space="preserve"> 
+    <value>This powerful soldier's armor pulses with The Mists energy. When you wear it on the upper floor of Stonemist Castle, sometimes your chest aches with pride and agony.</value>
+    <comment>Mistforged Triumphant Hero's Wargreaves</comment>
+  </data>  <data name=":82272" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Shinplates</comment>
+  </data>  <data name=":30692" xml:space="preserve"> 
+    <value>Dare this historian say, the Moot should only be brandished by the most charismatic of warriors. When drawn, your foe may be blinded by its grandiose display of light and splendor.</value>
+    <comment>The Moot</comment>
+  </data>  <data name=":84427" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Footgear</comment>
+  </data>  <data name=":30694" xml:space="preserve"> 
+    <value>Cast in the likeness of Forge Ironstrike, this rifle was crafted as a tribute to his battle against the Flame Legion Imperator. When Kalla fell in the Plains of Golghein, Ironstrike silenced the traitor.</value>
+    <comment>The Predator</comment>
+  </data>  <data name=":89266" xml:space="preserve"> 
+    <value>They needed to hold out a little longer—buy enough time for their partner to gain control of the cannon. They knew this dance all too well, and it was always exhilarating.</value>
+    <comment>Mistforged Glorious Hero's Legplates</comment>
+  </data>  <data name=":83702" xml:space="preserve"> 
+    <value>This powerful soldier's armor pulses with The Mists energy. When you wear it on the upper floor of Stonemist Castle, sometimes your chest aches with pride and agony.</value>
+    <comment>Mistforged Triumphant Hero's Legplates</comment>
+  </data>  <data name=":89126" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Mistforged Glorious Hero's Cap</comment>
+  </data>  <data name=":82465" xml:space="preserve"> 
+    <value>This suit of armor is melded from the helms of the wearer's opponents, a reminder of the battles won. There's something bittersweet about the way it smells - like clashing swords and sweaty palms.</value>
+    <comment>Ardent Glorious Gauntlets</comment>
+  </data>  <data name=":80557" xml:space="preserve"> 
+    <value>This armor is worn only by those who helped defeat Xera and silence the White Mantle in the depths of the Forsaken Thicket. When it catches the sun just right, it is a beacon of hope in a cruel world.</value>
+    <comment>Perfected Envoy Greaves</comment>
+  </data>  <data name=":82902" xml:space="preserve"> 
+    <value>"They never come back whole. Maybe they're only half-remembered..."</value>
+    <comment>Triumphant Hero's Masque</comment>
+  </data>  <data name=":82456" xml:space="preserve"> 
+    <value>"This—right now—is the rest of your life. Live it well."</value>
+    <comment>Triumphant Hero's Gauntlets</comment>
+  </data>  <data name=":84629" xml:space="preserve"> 
+    <value>"They never come back whole. Maybe they're only half-remembered..."</value>
+    <comment>Triumphant Hero's Armguards</comment>
+  </data>  <data name=":83957" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Wargreaves</comment>
+  </data>  <data name=":89209" xml:space="preserve"> 
+    <value>They needed to hold out a little longer—buy enough time for their partner to gain control of the cannon. They knew this dance all too well, and it was always exhilarating.</value>
+    <comment>Mistforged Glorious Hero's Pauldrons</comment>
+  </data>  <data name=":91234" xml:space="preserve"> 
+    <value>They walked through the Underworld, dove straight into the Mystic Forge. They crossed through the long-forgotten halls of The Key of Ahdashim—such feats would be cast in gold and told to awe-struck children.</value>
+    <comment>Coalescence</comment>
+  </data>  <data name=":84578" xml:space="preserve"> 
+    <value>"Are we dancing or dueling? It's your turn to pick."</value>
+    <comment>Triumphant Hero's Brigandine</comment>
+  </data>  <data name=":101568" xml:space="preserve"> 
+    <value>"Feels nigh impenetrable. But I reckon the look of this alone will send most of your enemies running." —Lyhr, Facet of Logic
+
+"Those who don't run'll just bounce off, eh?" —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Heavy Cuisses</comment>
+  </data>  <data name=":80131" xml:space="preserve"> 
+    <value>These vestments are imbued with the power of a crystalline heart, once carried through an abandoned prison to its final resting place. It is exemplary of the wearer's tenacity in the face of darkness.</value>
+    <comment>Perfected Envoy Mantle</comment>
+  </data>  <data name=":83348" xml:space="preserve"> 
+    <value>This suit of armor is melded from the helms of the wearer's opponents, a reminder of the battles won. There's something bittersweet about the way it smells - like clashing swords and sweaty palms.</value>
+    <comment>Ardent Glorious Breastplate</comment>
+  </data>  <data name=":30693" xml:space="preserve"> 
+    <value>The most renowned Thief in Kryta had a couple of calling cards—drove the Lionguard mad. She always left two things behind: a trail of confetti and a note that read "I can run faster than a Centaur!"</value>
+    <comment>Quip</comment>
+  </data>  <data name=":80281" xml:space="preserve"> 
+    <value>A symbol of cunning and patience, this garb carries power siphoned from a mysterious beast guarding the Forsaken Thicket. They seem to pulsate, albeit gently, when nearing a ley line.</value>
+    <comment>Perfected Envoy Boots</comment>
+  </data>  <data name=":86098" xml:space="preserve"> 
+    <value>The Binding of Ipos is as mystifying as it is venomous, dripping with ancient knowledge. Any warrior brave enough to carry this tome will be gifted with millennia of sinister magics.</value>
+    <comment>The Binding of Ipos</comment>
+  </data>  <data name=":82093" xml:space="preserve"> 
+    <value>"Are we dancing or dueling? It's your turn to pick."</value>
+    <comment>Triumphant Hero's Shinplates</comment>
+  </data>  <data name=":83289" xml:space="preserve"> 
+    <value>"They never come back whole. Maybe they're only half-remembered..."</value>
+    <comment>Triumphant Hero's Footgear</comment>
+  </data>  <data name=":80435" xml:space="preserve"> 
+    <value>This armor is worn only by those who helped defeat Xera and silence the White Mantle in the depths of the Forsaken Thicket. When it catches the sun just right, it is a beacon of hope in a cruel world.</value>
+    <comment>Perfected Envoy Pauldrons</comment>
+  </data>  <data name=":30687" xml:space="preserve"> 
+    <value>"I know this isn't the path you'd have chosen for yourself — but the Flame Legion isn't just your home now; It is my gift to you. Keep this dagger close and never forget who you are: Nonius Ragesinger."</value>
+    <comment>Incinerator</comment>
+  </data>  <data name=":30704" xml:space="preserve"> 
+    <value>While the other gods slept, Grenth took up his throne—beckoning his companions to dance and howl beneath the stars. It was said that his powers were most potent when the moon was highest in the sky.</value>
+    <comment>Twilight</comment>
+  </data>  <data name=":89093" xml:space="preserve"> 
+    <value>They needed to hold out a little longer—buy enough time for their partner to gain control of the cannon. They knew this dance all too well, and it was always exhilarating.</value>
+    <comment>Mistforged Glorious Hero's Gauntlets</comment>
+  </data>  <data name=":89260" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Mistforged Glorious Hero's Crown</comment>
+  </data>  <data name=":101602" xml:space="preserve"> 
+    <value>"Flawless blend of leathers and textiles with well-placed hardened armor pieces allowing for rapid movement with ample protection." —Lyhr, Facet of Logic
+
+"Aye. Looks sinister, too. In a good way." —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Medium Boots</comment>
+  </data>  <data name=":84508" xml:space="preserve"> 
+    <value>This exquisite scholarly garb shimmers with The Mists energy. When you wear it through Ruins of Power and unguarded Keep, sometimes you're haunted by nostalgia.</value>
+    <comment>Sublime Mistforged Triumphant Hero's Raiment</comment>
+  </data>  <data name=":30689" xml:space="preserve"> 
+    <value>Although the Six Human Gods have abandoned Tyria, their gifts remain. The oceans and land. The verdant forests, the limitless cosmos beyond—the ultimate love letter to the living, but also a solemn good-bye.</value>
+    <comment>Eternity</comment>
+  </data>  <data name=":97377" xml:space="preserve"> 
+    <value>When I was too little to fly, I dreamed of it. I still dreamed after Vlast The Sacrifice, but the promise of endless freedom and joy wasn't real anymore. His heart and mind were tethered to the ground, and in the end his body joined them.</value>
+    <comment>Aurene's Persuasion</comment>
+  </data>  <data name=":82925" xml:space="preserve"> 
+    <value>This exquisite scholarly garb shimmers with The Mists energy. When you wear it through Ruins of Power and unguarded Keep, sometimes you're haunted by nostalgia.</value>
+    <comment>Mistforged Triumphant Hero's Masque</comment>
+  </data>  <data name=":80145" xml:space="preserve"> 
+    <value>A symbol of cunning and patience, this garb carries power siphoned from a mysterious beast guarding the Forsaken Thicket. They seem to pulsate, albeit gently, when nearing a ley line.</value>
+    <comment>Perfected Envoy Shoulderpads</comment>
+  </data>  <data name=":82963" xml:space="preserve"> 
+    <value>"This—right now—is the rest of your life. Live it well."</value>
+    <comment>Triumphant Hero's Pauldrons</comment>
+  </data>  <data name=":80296" xml:space="preserve"> 
+    <value>A symbol of cunning and patience, this garb carries power siphoned from a mysterious beast guarding the Forsaken Thicket. They seem to pulsate, albeit gently, when nearing a ley line.</value>
+    <comment>Perfected Envoy Mask</comment>
+  </data>  <data name=":82245" xml:space="preserve"> 
+    <value>This garb is the perfect blend of lightweight and sturdy, ideal for the sneakiest saboteur. Their enemies may cry foul play, but I assure you, only those with a swift foot possess such finery.</value>
+    <comment>Ardent Glorious Wristplates</comment>
+  </data>  <data name=":89235" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Mistforged Glorious Hero's Shinplates</comment>
+  </data>  <data name=":82173" xml:space="preserve"> 
+    <value>"They never come back whole. Maybe they're only half-remembered..."</value>
+    <comment>Triumphant Hero's Epaulets</comment>
+  </data>  <data name=":84461" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Armguards</comment>
+  </data>  <data name=":82348" xml:space="preserve"> 
+    <value>This powerful soldier's armor pulses with The Mists energy. When you wear it on the upper floor of Stonemist Castle, sometimes your chest aches with pride and agony.</value>
+    <comment>Mistforged Triumphant Hero's Gauntlets</comment>
+  </data>  <data name=":30696" xml:space="preserve"> 
+    <value>"The Flameseeker Prophecies" is an ancient tome containing near-complete proclamations of the future as foreseen by the dragon Glint. The final chapter is intentionally left unwritten...</value>
+    <comment>The Flameseeker Prophecies</comment>
+  </data>  <data name=":89174" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Mistforged Glorious Hero's Raiment</comment>
+  </data>  <data name=":84633" xml:space="preserve"> 
+    <value>Crafted from the finest silks, these vestments are a symbol not only of sheer strength but also quick-witted bravery and grit. They know their way around the streets of Battle of Khylo here and back again.</value>
+    <comment>Ardent Glorious Crown</comment>
+  </data>  <data name=":84301" xml:space="preserve"> 
+    <value>This powerful soldier's armor pulses with The Mists energy. When you wear it on the upper floor of Stonemist Castle, sometimes your chest aches with pride and agony.</value>
+    <comment>Mistforged Triumphant Hero's Warhelm</comment>
+  </data>  <data name=":101516" xml:space="preserve"> 
+    <value>"Impressive materials. Strong, flexible. Sharp look, too. I reckon you could wear this in battle and then wear it to court." —Lyhr, Facet of Logic
+
+"Clean the blood off first." —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Light Crown</comment>
+  </data>  <data name=":96652" xml:space="preserve"> 
+    <value>Balthazar make me furious. If you had truly wanted anything but revenge, my champion could have helped you instead of To Kill a God you. You wouldn't have been alone. I wish I could have talked to you. I wish I believed it could have helped.</value>
+    <comment>Aurene's Insight</comment>
+  </data>  <data name=":84481" xml:space="preserve"> 
+    <value>This powerful soldier's armor pulses with The Mists energy. When you wear it on the upper floor of Stonemist Castle, sometimes your chest aches with pride and agony.</value>
+    <comment>Sublime Mistforged Triumphant Hero's Breastplate</comment>
+  </data>  <data name=":97590" xml:space="preserve"> 
+    <value>It wasn't painful, but it was dark. Darker than anything I've seen or felt before. Pulsing with unfamiliar magic... Malice, bleeding into my flesh. Caressing my mind like... Like...</value>
+    <comment>Aurene's Flight</comment>
+  </data>  <data name=":96203" xml:space="preserve"> 
+    <value>The weight of the world, the balance of time and nature... All of it, sitting on my shoulders. It's heavy... Crippling, even. But there's something comforting, knowing that I can make a difference.</value>
+    <comment>Aurene's Claw</comment>
+  </data>  <data name=":82109" xml:space="preserve"> 
+    <value>This exquisite scholarly garb shimmers with The Mists energy. When you wear it through Ruins of Power and unguarded Keep, sometimes you're haunted by nostalgia.</value>
+    <comment>Mistforged Triumphant Hero's Armguards</comment>
+  </data>  <data name=":82423" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Crown</comment>
+  </data>  <data name=":89183" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Mistforged Glorious Hero's Brigandine</comment>
+  </data>  <data name=":30688" xml:space="preserve"> 
+    <value>The Minstrel is a bard's dearest companion, a vessel of their spirit and artistry. Delicate notes fade in the wielder's wake, leaving passersby with a gentle whisper of their vestige.</value>
+    <comment>The Minstrel</comment>
+  </data>  <data name=":71383" xml:space="preserve"> 
+    <value>Nevermore is a living reminder that there's always a purpose to Raven (Spirit of the Wild) riddles and tests. When you're mired in despair, lost for answers, he pushes because he knows you can fly.</value>
+    <comment>Nevermore</comment>
+  </data>  <data name=":101462" xml:space="preserve"> 
+    <value>"Impressive materials. Strong, flexible. Sharp look, too. I reckon you could wear this in battle and then wear it to court." —Lyhr, Facet of Logic
+
+"Clean the blood off first." —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Light Mantle</comment>
+  </data>  <data name=":82102" xml:space="preserve"> 
+    <value>"This sturdy adventuring suit glows with Mist energy. When you wear it inside Obsidian Sanctum, sometimes you catch yourself longing for a forbidden reunion."</value>
+    <comment>Sublime Mistforged Triumphant Hero's Brigandine</comment>
+  </data>  <data name=":97783" xml:space="preserve"> 
+    <value>You should never lose anything or anyone, ever again. The world should be like a beautiful garden and only grow around you forever. I know it can't happen that way, but I don't want to be what you lose next.</value>
+    <comment>Aurene's Voice</comment>
+  </data>  <data name=":83929" xml:space="preserve"> 
+    <value>This garb is the perfect blend of lightweight and sturdy, ideal for the sneakiest saboteur. Their enemies may cry foul play, but I assure you, only those with a swift foot possess such finery.</value>
+    <comment>Ardent Glorious Shoulderguards</comment>
+  </data>  <data name=":80488" xml:space="preserve"> 
+    <value>As Zhaitan's influence grew, the Vigil raced to the site of Kryta's greatest maritime tragedy on an improbable mission. The HMS Divinity's long-dead crew—shackled to their ship as it sank—were all recovered.</value>
+    <comment>The HMS Divinity</comment>
+  </data>  <data name=":101556" xml:space="preserve"> 
+    <value>"Flawless blend of leathers and textiles with well-placed hardened armor pieces allowing for rapid movement with ample protection." —Lyhr, Facet of Logic
+
+"Aye. Looks sinister, too. In a good way." —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Medium Jacket</comment>
+  </data>  <data name=":83240" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Legguards</comment>
+  </data>  <data name=":82801" xml:space="preserve"> 
+    <value>"This—right now—is the rest of your life. Live it well."</value>
+    <comment>Triumphant Hero's Wargreaves</comment>
+  </data>  <data name=":80190" xml:space="preserve"> 
+    <value>These vestments are imbued with the power of a crystalline heart, once carried through an abandoned prison to its final resting place. It is exemplary of the wearer's tenacity in the face of darkness.</value>
+    <comment>Perfected Envoy Vestments</comment>
+  </data>  <data name=":84723" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Epaulets</comment>
+  </data>  <data name=":81957" xml:space="preserve"> 
+    <value>To its namesake faction, the Shining Blade is more an old friend than an ancient Seer artifact. Its historical codenames include "the family heirloom," "that old thing," and "Gran's best knife."</value>
+    <comment>The Shining Blade</comment>
+  </data>  <data name=":78556" xml:space="preserve"> 
+    <value>Thanks to their bond with you, someday Nola, Halkor, and Brill will be magnificent tigers, facing the world with dignity and wisdom. For now, their paws are far too big for them.</value>
+    <comment>Chuka and Champawat</comment>
+  </data>  <data name=":89252" xml:space="preserve"> 
+    <value>They needed to hold out a little longer—buy enough time for their partner to gain control of the cannon. They knew this dance all too well, and it was always exhilarating.</value>
+    <comment>Mistforged Glorious Hero's Wargreaves</comment>
+  </data>  <data name=":30685" xml:space="preserve"> 
+    <value>When Secondborn Lonicera sacrificed herself to protect the Pale Tree, a small root sprung from the ground where she breathed her final breath. That root took the shape of a mighty bow.</value>
+    <comment>Kudzu</comment>
+  </data>  <data name=":101544" xml:space="preserve"> 
+    <value>"Feels nigh impenetrable. But I reckon the look of this alone will send most of your enemies running." —Lyhr, Facet of Logic
+
+"Those who don't run'll just bounce off, eh?" —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Heavy Helmet</comment>
+  </data>  <data name=":101521" xml:space="preserve"> 
+    <value>"Feels nigh impenetrable. But I reckon the look of this alone will send most of your enemies running." —Lyhr, Facet of Logic
+
+"Those who don't run'll just bounce off, eh?" —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Heavy Breastplate</comment>
+  </data>  <data name=":83127" xml:space="preserve"> 
+    <value>This suit of armor is melded from the helms of the wearer's opponents, a reminder of the battles won. There's something bittersweet about the way it smells - like clashing swords and sweaty palms.</value>
+    <comment>Ardent Glorious Pauldrons</comment>
+  </data>  <data name=":82334" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Breastplate</comment>
+  </data>  <data name=":82214" xml:space="preserve"> 
+    <value>This garb is the perfect blend of lightweight and sturdy, ideal for the sneakiest saboteur. Their enemies may cry foul play, but I assure you, only those with a swift foot possess such finery.</value>
+    <comment>Ardent Glorious Shinplates</comment>
+  </data>  <data name=":84655" xml:space="preserve"> 
+    <value>This suit of armor is melded from the helms of the wearer's opponents, a reminder of the battles won. There's something bittersweet about the way it smells - like clashing swords and sweaty palms.</value>
+    <comment>Ardent Glorious Wargreaves</comment>
+  </data>  <data name=":30691" xml:space="preserve"> 
+    <value>A historian once wrote of a great beast that lurked off the coast of Orr—possibly a living Champion of Zhaitan. Although she hasn't been seen for a century past, her kin still roam the dark waters.</value>
+    <comment>Kamohoali'i Kotaki</comment>
+  </data>  <data name=":82519" xml:space="preserve"> 
+    <value>Crafted from the finest silks, these vestments are a symbol not only of sheer strength but also quick-witted bravery and grit. They know their way around the streets of Battle of Khylo here and back again.</value>
+    <comment>Ardent Glorious Footgear</comment>
+  </data>  <data name=":76158" xml:space="preserve"> 
+    <value>Sunsmith Ouissal dreamed she gifted an exquisite axe to a woman with skin like the star-kissed sky above the Astralarium. She woke and ran to her workbench, a delighted laugh lingering in her memory.</value>
+    <comment>Astralaria</comment>
+  </data>  <data name=":101551" xml:space="preserve"> 
+    <value>"Feels nigh impenetrable. But I reckon the look of this alone will send most of your enemies running." —Lyhr, Facet of Logic
+
+"Those who don't run'll just bounce off, eh?" —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Heavy Pauldrons</comment>
+  </data>  <data name=":83699" xml:space="preserve"> 
+    <value>"This sturdy adventuring suit glows with Mist energy. When you wear it inside Obsidian Sanctum, sometimes you catch yourself longing for a forbidden reunion."</value>
+    <comment>Mistforged Triumphant Hero's Shinplates</comment>
+  </data>  <data name=":82698" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Plate Helm</comment>
+  </data>  <data name=":95675" xml:space="preserve"> 
+    <value>I don't want to have a destiny. I want to eat half your food and go to sleep while you read, but if I act like a baby now everyone will remember later. Maybe Vlast was right and it's better if they think I'm angry.</value>
+    <comment>Aurene's Fang</comment>
+  </data>  <data name=":30703" xml:space="preserve"> 
+    <value>It is said that when Dwayna woke each morning, she gifted her followers with the warmth of dawn. All of the creatures in Tyria stirred from their slumber to witness the glorious sunrise.</value>
+    <comment>Sunrise</comment>
+  </data>  <data name=":101579" xml:space="preserve"> 
+    <value>"Flawless blend of leathers and textiles with well-placed hardened armor pieces allowing for rapid movement with ample protection." —Lyhr, Facet of Logic
+
+"Aye. Looks sinister, too. In a good way." —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Medium Leggings</comment>
+  </data>  <data name=":89117" xml:space="preserve"> 
+    <value>They needed to hold out a little longer—buy enough time for their partner to gain control of the cannon. They knew this dance all too well, and it was always exhilarating.</value>
+    <comment>Mistforged Glorious Hero's Plate Helm</comment>
+  </data>  <data name=":81908" xml:space="preserve"> 
+    <value>When Mordremoth's power seeped into the earth, some sought to harness it, control it - bringing forth new dangers. Heroes faced those enemies head on with a spark of bravery and a warrior's might.</value>
+    <comment>Aurora</comment>
+  </data>  <data name=":82098" xml:space="preserve"> 
+    <value>The Lore of this Item has been obscured by the Mists.</value>
+    <comment>Glorious Hero's Brigandine</comment>
+  </data>  <data name=":80277" xml:space="preserve"> 
+    <value>This armor is worn only by those who helped defeat Xera and silence the White Mantle in the depths of the Forsaken Thicket. When it catches the sun just right, it is a beacon of hope in a cruel world.</value>
+    <comment>Perfected Envoy Tassets</comment>
+  </data>  <data name=":103815" xml:space="preserve"> 
+    <value>As The Dragonstorm raged outside, Southward Claw looked over his people. Kodan were huddled together for warmth-their bellies rumbled, and worry laced their eyes. But the wind was too fierce and the falling snow too thick to hunt. He looked at shivering cubs and made his choice: the Claw would lead them south, away from danger. He could wait for Waiting Sorrow no longer.</value>
+    <comment>Klobjarne Geirr</comment>
+  </data>  <data name=":96356" xml:space="preserve"> 
+    <value>His voice whispers at the back of my mind, his soul as ripe as it was in "life." He tells me things. About The Mists, about The Underworld... Terrifying, dark things.</value>
+    <comment>Aurene's Bite</comment>
+  </data>  <data name=":82512" xml:space="preserve"> 
+    <value>This garb is the perfect blend of lightweight and sturdy, ideal for the sneakiest saboteur. Their enemies may cry foul play, but I assure you, only those with a swift foot possess such finery.</value>
+    <comment>Ardent Glorious Legguards</comment>
+  </data>  <data name=":101645" xml:space="preserve"> 
+    <value>"Flawless blend of leathers and textiles with well-placed hardened armor pieces allowing for rapid movement with ample protection." —Lyhr, Facet of Logic
+
+"Aye. Looks sinister, too. In a good way." —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Medium Shoulders</comment>
+  </data>  <data name=":30699" xml:space="preserve"> 
+    <value>Interwoven with an impression of a Dragon whose name Tyria has yet to learn, Bolt is imbued with the strength of a storm–swelling inside like a thunderous inferno, eager to aid its wielder in combat.</value>
+    <comment>Bolt</comment>
+  </data>  <data name=":88576" xml:space="preserve"> 
+    <value>Hylek of the Astrozintli Forelands revere the life serpent Xiuquatl. While it's too small and gentle to be their savior, those traits make it Tequatl the Sunless perfect opposite—and a potent symbol of hope.</value>
+    <comment>Xiuquatl</comment>
+  </data>  <data name=":80205" xml:space="preserve"> 
+    <value>This armor is worn only by those who helped defeat Xera and silence the White Mantle in the depths of the Forsaken Thicket. When it catches the sun just right, it is a beacon of hope in a cruel world.</value>
+    <comment>Perfected Envoy Gauntlets</comment>
+  </data>  <data name=":80578" xml:space="preserve"> 
+    <value>A symbol of cunning and patience, this garb carries power siphoned from a mysterious beast guarding the Forsaken Thicket. They seem to pulsate, albeit gently, when nearing a ley line.</value>
+    <comment>Perfected Envoy Jerkin</comment>
+  </data>  <data name=":95684" xml:space="preserve"> 
+    <value>Even inside the shell of my Glint's Egg, I could feel them—Pact Commander. Their soul smelled of pain and ached, but somehow I knew... I knew that I was safe in their care.</value>
+    <comment>Aurene's Weight</comment>
+  </data>  <data name=":82196" xml:space="preserve"> 
+    <value>"This—right now—is the rest of your life. Live it well."</value>
+    <comment>Triumphant Hero's Legplates</comment>
+  </data>  <data name=":80356" xml:space="preserve"> 
+    <value>These vestments are imbued with the power of a crystalline heart, once carried through an abandoned prison to its final resting place. It is exemplary of the wearer's tenacity in the face of darkness.</value>
+    <comment>Perfected Envoy Pants</comment>
+  </data>  <data name=":89152" xml:space="preserve"> 
+    <value>They needed to hold out a little longer—buy enough time for their partner to gain control of the cannon. They knew this dance all too well, and it was always exhilarating.</value>
+    <comment>Mistforged Glorious Hero's Breastplate</comment>
+  </data>  <data name=":30695" xml:space="preserve"> 
+    <value>Meteorlogicus was designed by a Sylvari astrologer, Surya — a love letter to the sky. She once used the orrery to trace a thunderous cloud that lurked on the horizon. She knew then: a dragon had awoken.</value>
+    <comment>Meteorlogicus</comment>
+  </data>  <data name=":79562" xml:space="preserve"> 
+    <value>Eureka was the pride and downfall of a rogue Priory research team who set out to reactivate Obsidian Shard sampled from ancient armor. Paired with magitech, the material assumed a deadlier form.</value>
+    <comment>Eureka</comment>
+  </data>  <data name=":92991" xml:space="preserve"> 
+    <value>The amulet was a sight to behold, swinging back and forth while the warrior perfected the swing of her sword. She was a champion—onlookers bowed as they passed, but her attention was elsewhere.</value>
+    <comment>Transcendence</comment>
+  </data>  <data name=":95808" xml:space="preserve"> 
+    <value>Elder Dragon Soo-Won kept her distance from the mortal realm, but I needed that connection—I yearned for it. Without my Dragon's Watch, would I feel the same need to protect this place?</value>
+    <comment>Aurene's Argument</comment>
+  </data>  <data name=":101501" xml:space="preserve"> 
+    <value>"Impressive materials. Strong, flexible. Sharp look, too. I reckon you could wear this in battle and then wear it to court." —Lyhr, Facet of Logic
+
+"Clean the blood off first." —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Light Pants</comment>
+  </data>  <data name=":101614" xml:space="preserve"> 
+    <value>"Flawless blend of leathers and textiles with well-placed hardened armor pieces allowing for rapid movement with ample protection." —Lyhr, Facet of Logic
+
+"Aye. Looks sinister, too. In a good way." —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Medium Mask</comment>
+  </data>  <data name=":101499" xml:space="preserve"> 
+    <value>"Impressive materials. Strong, flexible. Sharp look, too. I reckon you could wear this in battle and then wear it to court." —Lyhr, Facet of Logic
+
+"Clean the blood off first." —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Light Regalia</comment>
+  </data>  <data name=":80399" xml:space="preserve"> 
+    <value>These vestments are imbued with the power of a crystalline heart, once carried through an abandoned prison to its final resting place. It is exemplary of the wearer's tenacity in the face of darkness.</value>
+    <comment>Perfected Envoy Shoes</comment>
+  </data>  <data name=":101460" xml:space="preserve"> 
+    <value>"Feels nigh impenetrable. But I reckon the look of this alone will send most of your enemies running." —Lyhr, Facet of Logic
+
+"Those who don't run'll just bounce off, eh?" —Lyhr, Facet of Emotion</value>
+    <comment>Obsidian Heavy Greaves</comment>
+  </data>  <data name=":87109" xml:space="preserve"> 
+    <value>This ancient charr relic has served as an apparatus of revolution, a key to power, and a symbol of stability. The Claw of the Khan-Ur is reforged with every great feat its wielders accomplish.</value>
+    <comment>Claw of the Khan-Ur</comment>
+  </data>  <data name=":82502" xml:space="preserve"> 
+    <value>This exquisite scholarly garb shimmers with The Mists energy. When you wear it through Ruins of Power and unguarded Keep, sometimes you're haunted by nostalgia.</value>
+    <comment>Mistforged Triumphant Hero's Leggings</comment>
+  </data>  <data name=":96937" xml:space="preserve"> 
+    <value>Magic. Everywhere. Swirling and whispering, like a flock of birds dancing through the air. It settles at my feet. Dust, piling higher and higher like sand on a beach... Wake up, it says. Wake up.</value>
+    <comment>Aurene's Rending</comment>
+  </data>  <data name=":74155" xml:space="preserve"> 
+    <value>Log 18204: Losing transmissions̱omething went wrongI̱'mstranded_. I'm stuck inFractal. Floating. The whole island isf̲loating. Call themselvesForgotten. Trees. I sees̱omeone_? Can you hearme?</value>
+    <comment>Ad Infinitum</comment>
+  </data>  <data name=":97165" xml:space="preserve"> 
+    <value>I chirped at my Pact Commander—my "Champion." I could already feel something pulling us together, even Precocious Aurene. Or perhaps it was just a rumble of my belly, recently filled with Smoked Fish Dinner (for Aurene).</value>
+    <comment>Aurene's Gaze</comment>
+  </data>  <data name=":101582" xml:space="preserve"> 
+    <value>"Mmm... This relic is compact. Extremely versatile as well. Should these find their way into too many hands, I will be looking for a new line of business."—Archivist Ikur</value>
+    <comment>Legendary Relic</comment>
+  </data>
+</root>

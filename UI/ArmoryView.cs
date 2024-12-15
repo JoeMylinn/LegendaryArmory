@@ -1,5 +1,8 @@
-﻿using Blish_HUD.Controls;
+﻿using System;
+using Blish_HUD;
+using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
+using Blish_HUD.Modules.Managers;
 using Gw2Sharp;
 using Gw2Sharp.WebApi.V2.Models;
 using LegendaryArmory.Helper;
@@ -7,12 +10,15 @@ using LegendaryArmory.Services;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace LegendaryArmory.UI
 {
 	internal class ArmoryView : View {
 
 		private ArmoryService armoryService;
+		private LoreWindow _loreWindow;
 		private List<string> twoHanded = new List<string> { "Hammer", "LongBow", "ShortBow", "Greatsword", "Rifle", "Staff", "Speargun", "Harpoon", "Trident" };
 		private List<string> oneHanded = new List<string>{ "Sword", "Axe", "Dagger", "Mace", "Pistol", "Scepter" };
 		private List<string> offHand = new List<string>{ "Focus", "Warhorn", "Torch", "Shield" };
@@ -23,6 +29,8 @@ namespace LegendaryArmory.UI
 		public ArmoryView(ArmoryService armoryService)
 		{
 			this.armoryService = armoryService;
+			_loreWindow = new LoreWindow(this);
+
 			foreach (var item in armoryService.LegendaryItems)
 			{
 				LegendaryImages.Add((item.Id, ImageFromItem(item)));
@@ -187,7 +195,7 @@ namespace LegendaryArmory.UI
 				MaxAmount = armoryService.legendaryIds.Find(a => a.Id == item.Id).MaxCount 
 			};
 
-			switch(item.Type.ToEnum())
+			switch (item.Type.ToEnum())
 			{
 				case ItemType.Weapon:
 					AddWeaponValues((ItemWeapon)item, image);
@@ -196,6 +204,11 @@ namespace LegendaryArmory.UI
 					AddArmorValues((ItemArmor)item, image);
 					break;
 			}
+
+			image.Click += delegate
+			{
+				_loreWindow.Show(item.Id);
+			};
 
 			return image;
 		}
@@ -280,6 +293,7 @@ namespace LegendaryArmory.UI
 				<= 30704 => 1,
 				> 30704 and <= 90551 => 2,
 				> 90551 and <= 97783 => 3,
+				> 97783 and <= 103815 => 4,
 				_ => 0,
 			};
 			image.WieldType = GetWeaponFlags(item.Details.Type.ToString());
@@ -313,13 +327,26 @@ namespace LegendaryArmory.UI
 
 		public void UpdateAmounts(List<AccountLegendaryArmory> owned)
 		{
+			var updated = new List<int>();
+
 			foreach (var item in owned) {
-				foreach(var img in LegendaryImages.Where(t => t.Item1 == item.Id)) {
-					img.Item2.Amount = item.Count;
+				foreach (var img in LegendaryImages.Where(t => t.Item1 == item.Id)) {
+					if (img.Item2.Amount != item.Count)
+					{
+						img.Item2.Amount = item.Count;
+						updated.Add(img.Item1);
+					}
 				}
 			}
 
-			foreach(var img in LegendaryImages) {
+			foreach (var img in LegendaryImages.Where(t => t.Item2.Tooltip == null))
+			{
+				updated.Add(img.Item1);
+			}
+
+			updated.Distinct();
+
+			foreach(var img in LegendaryImages.Where(i => updated.Contains(i.Item1))) {
 				var item = armoryService.LegendaryItems.First(i => i.Id == img.Item1);
 				switch (item.Type.ToEnum())
 				{
@@ -342,14 +369,9 @@ namespace LegendaryArmory.UI
 			}
 		} 
 
-		private void TwoHanded_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-		{
-			throw new System.NotImplementedException();
-		}
-
-
 		protected override void Unload()
 		{
+			_loreWindow.Hide();
 			base.Unload();
 		}
 	}

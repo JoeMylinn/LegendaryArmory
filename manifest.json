@@ -1,13 +1,13 @@
 {
   "name": "Legendary Armory",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "namespace": "joe.legendaryarmory",
   "package": "Legendary Armory.dll",
   "manifest_version": 1,
 
   "description": "Adds an overview of your unlocked Legendary Items.",
   "dependencies": {
-    "bh.blishhud": ">=1.1.1"
+    "bh.blishhud": ">=1.2.0"
   },
   "url": "https://github.com/JoeMylinn/LegendaryArmory",
   "contributors": [

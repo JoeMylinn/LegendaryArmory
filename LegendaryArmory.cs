@@ -44,9 +44,6 @@ namespace LegendaryArmory
 			_cTs = new CancellationTokenSource();
 			_cT = _cTs.Token;
 
-
-			_armoryService = new ArmoryService();
-
 			GameService.Content.DatAssetCache.TryGetTextureFromAssetId(1078536, out AsyncTexture2D chestTexture);
 
 			_armoryCornerIcon = new CornerIcon()
@@ -74,6 +71,8 @@ namespace LegendaryArmory
 
 		protected override async Task LoadAsync()
 		{
+			_armoryService = new ArmoryService();
+
 			_armoryService.InitLegendaries(Gw2ApiManager.Gw2ApiClient.V2);
 			_armoryView = new ArmoryView(_armoryService);
 			UpdateAmountsRepeat();
