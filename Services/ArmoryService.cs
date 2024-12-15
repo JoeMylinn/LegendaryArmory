@@ -13,13 +13,13 @@ namespace LegendaryArmory.Services
 {
 	internal class ArmoryService : IDisposable
 	{
-		private static Logger Logger = Logger.GetLogger<ArmoryService>();
+		private static readonly Logger Logger = Logger.GetLogger<ArmoryService>();
 
-		public List<Gw2Sharp.WebApi.V2.Models.LegendaryArmory> legendaryIds = new List<Gw2Sharp.WebApi.V2.Models.LegendaryArmory>();
-		public List<Item> LegendaryItems = new List<Item>();
-		public List<AccountLegendaryArmory> OwnedLegendaries = new List<AccountLegendaryArmory>();
-		public List<KeyValuePair<String, ProfessionWeapon>> ProfessionWeapons = new List<KeyValuePair<String, ProfessionWeapon>>();
-		public List<Skin> WeaponVariants = new List<Skin>();
+		public List<Gw2Sharp.WebApi.V2.Models.LegendaryArmory> legendaryIds = new();
+		public List<Item> LegendaryItems = new();
+		public List<AccountLegendaryArmory> OwnedLegendaries = new();
+		public List<KeyValuePair<String, ProfessionWeapon>> ProfessionWeapons = new();
+		public List<Skin> WeaponVariants = new();
 		public ArmoryService() 
 		{
 				
@@ -57,7 +57,7 @@ namespace LegendaryArmory.Services
 			}
 		}
 
-		private List<int> variantSkinIds = new List<int>
+		private readonly List<int> variantSkinIds = new()
 		{
 			10244,10250,10251,10252,10259,10260,10266,10284,10287,10288,10294,10301,10309,10311,10320,10324,
 			10327,10329,10332,10343,10345,10346,10347,10350,10353,10355,10358,10363,10366,10381,10388,10390,
@@ -67,7 +67,7 @@ namespace LegendaryArmory.Services
 			10676,10678,10685,10693,10696,10697,10711,10712,10716,10720,10729,10730,10738,10739,10747,10748
 		};
 
-		private List<int> variantIds = new List<int>
+		private readonly List<int> variantIds = new()
 		{
 			98091,98098,98099,98104,98109,98116,98118,98120,98138,98142,98143,98144,98146,98158,98160,98162,
 			98219,98224,98227,98230,98231,98232,98260,98270,98275,98282,98284,98286,98289,98291,98296,98298,
@@ -121,7 +121,7 @@ namespace LegendaryArmory.Services
 			view.UpdateAmounts(OwnedLegendaries);
 		}
 
-		private List<string> weaponTypeOrder = new()
+		private readonly List<string> weaponTypeOrder = new()
 		{
 			"Sword","Hammer","LongBow","ShortBow","Axe","Dagger","Greatsword","Mace","Pistol","Rifle","Scepter","Staff","Focus","Torch","Warhorn","Shield","Harpoon", "Speargun","Trident"
 		};
