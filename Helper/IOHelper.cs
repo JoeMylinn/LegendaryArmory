@@ -12,8 +12,8 @@ namespace LegendaryArmory.Helper
     internal class IOHelper
     {
         private static readonly Logger Logger = Logger.GetLogger<IOHelper>();
-        private static string data_path = DirectoryUtil.BasePath + @"\legendary_armory\data\";
-        private static JsonSerializerSettings settings = new JsonSerializerSettings
+        private static readonly string data_path = DirectoryUtil.BasePath + @"\legendary_armory\data\";
+        private static readonly JsonSerializerSettings settings = new()
         {
             TypeNameHandling = TypeNameHandling.All,
             Formatting = Formatting.Indented,

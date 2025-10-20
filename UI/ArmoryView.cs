@@ -16,12 +16,12 @@ namespace LegendaryArmory.UI
 
         private ArmoryService armoryService;
         private LoreWindow _loreWindow;
-        private List<string> twoHanded = new List<string> { "Hammer", "LongBow", "ShortBow", "Greatsword", "Rifle", "Staff", "Speargun", "Harpoon", "Trident" };
-        private List<string> oneHanded = new List<string> { "Sword", "Axe", "Dagger", "Mace", "Pistol", "Scepter" };
-        private List<string> offHand = new List<string> { "Focus", "Warhorn", "Torch", "Shield" };
-        private List<string> trinkets = new List<string> { "Accessory", "Ring", "Amulet" };
+        private List<string> twoHanded = new() { "Hammer", "LongBow", "ShortBow", "Greatsword", "Rifle", "Staff", "Speargun", "Harpoon", "Trident" };
+        private List<string> oneHanded = new() { "Sword", "Axe", "Dagger", "Mace", "Pistol", "Scepter" };
+        private List<string> offHand = new() { "Focus", "Warhorn", "Torch", "Shield" };
+        private List<string> trinkets = new() { "Accessory", "Ring", "Amulet" };
 
-        public List<(int, LegendaryImage)> LegendaryImages = new List<(int, LegendaryImage)>();
+        public List<(int, LegendaryImage)> LegendaryImages = new();
 
         public ArmoryView(ArmoryService armoryService)
         {
@@ -182,7 +182,7 @@ namespace LegendaryArmory.UI
 
         private LegendaryImage ImageFromItem(LegendaryItem item)
         {
-            LegendaryImage image = new LegendaryImage()
+            LegendaryImage image = new()
             {
                 Item = item,
                 Texture = armoryService.GetIconFromUrl(item.Icon),
@@ -303,24 +303,14 @@ namespace LegendaryArmory.UI
                 img.Item2.UpdateOpacity();
                 var item = armoryService.legendaries.First(i => i.Id == img.Item1);
 
-                switch (item.Type)
+                img.Item2.Tooltip = item.Type switch
                 {
-                    case ItemType.Weapon:
-                        img.Item2.Tooltip = TooltipHelper.CreateTooltip((LegendaryWeapon)item, img.Item2);
-                        break;
-                    case ItemType.Armor:
-                        img.Item2.Tooltip = TooltipHelper.CreateTooltip((LegendaryArmor)item, img.Item2);
-                        break;
-                    case ItemType.Trinket:
-                        img.Item2.Tooltip = TooltipHelper.CreateTooltip((LegendaryTrinket)item, img.Item2);
-                        break;
-                    case ItemType.UpgradeComponent:
-                        img.Item2.Tooltip = TooltipHelper.CreateTooltip((LegendaryUpgrade)item, img.Item2);
-                        break;
-                    default:
-                        img.Item2.Tooltip = TooltipHelper.CreateTooltip(item, img.Item2);
-                        break;
-                }
+                    ItemType.Weapon => TooltipHelper.CreateTooltip((LegendaryWeapon)item, img.Item2),
+                    ItemType.Armor => TooltipHelper.CreateTooltip((LegendaryArmor)item, img.Item2),
+                    ItemType.Trinket => TooltipHelper.CreateTooltip((LegendaryTrinket)item, img.Item2),
+                    ItemType.UpgradeComponent => TooltipHelper.CreateTooltip((LegendaryUpgrade)item, img.Item2),
+                    _ => TooltipHelper.CreateTooltip(item, img.Item2),
+                };
             }
         }
 

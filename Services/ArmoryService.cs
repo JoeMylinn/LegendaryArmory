@@ -33,7 +33,7 @@ namespace LegendaryArmory.Services
         public void InitLegendaries(IGw2WebApiV2Client apiClient)
         {
             try
-             {
+            {
                 Logger.Debug("Getting Legendaries from API.");
                 legendaryIds = apiClient.LegendaryArmory.AllAsync().Result.ToList();
                 //Remove IDs of unobtainable items TODO: change to allow for multiple removals, for future proofing
@@ -245,7 +245,7 @@ namespace LegendaryArmory.Services
             {
                 weapon = "Spear";
             }
-            List<ProfessionWeaponFlag> result = new List<ProfessionWeaponFlag>();
+            List<ProfessionWeaponFlag> result = new();
             foreach (var flags in ProfessionWeapons.Where(p => p.Key.Equals(weapon, System.StringComparison.OrdinalIgnoreCase)).Select(p => p.Value.Flags))
             {
                 foreach (var flag in flags)

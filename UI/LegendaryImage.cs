@@ -40,7 +40,7 @@ namespace LegendaryArmory.UI
         {
             //Values for Border
             int lineWidth = 2;
-            Color color = new Color(136, 79, 217);
+            Color color = new(136, 79, 217);
             // Top-Left to Top-Right
             spriteBatch.DrawOnCtrl(this, ContentService.Textures.Pixel, new Rectangle(bounds.X, bounds.Y, bounds.Width - lineWidth, lineWidth), color);
 
