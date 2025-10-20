@@ -151,8 +151,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\IOHelper.cs" />
     <Compile Include="Helper\TooltipHelper.cs" />
     <Compile Include="LegendaryArmory.cs" />
+    <Compile Include="Models\LegendaryArmor.cs" />
+    <Compile Include="Models\LegendaryItem.cs" />
+    <Compile Include="Models\LegendaryTrinket.cs" />
+    <Compile Include="Models\LegendaryUpgrade.cs" />
+    <Compile Include="Models\LegendaryWeapon.cs" />
     <Compile Include="Services\ArmoryService.cs" />
     <Compile Include="Strings\Lore.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -177,6 +183,7 @@
     </Reference>
     <Reference Include="Blish HUD, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\BlishHUD.1.2.0\lib\net472\Blish HUD.exe</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Gw2Sharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Gw2Sharp.1.7.4\lib\netstandard2.0\Gw2Sharp.dll</HintPath>
