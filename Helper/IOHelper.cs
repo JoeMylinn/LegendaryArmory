@@ -27,7 +27,7 @@ namespace LegendaryArmory.Helper
 
             try
             {
-                Logger.Warn("Saving item data to local storage.");
+                Logger.Debug("Saving item data to local storage.");
                 File.WriteAllText(data_path + "legendaries.json", JsonConvert.SerializeObject(legendaries, settings));
                 return true;
             }
@@ -54,15 +54,14 @@ namespace LegendaryArmory.Helper
             }
         }
 
-        public static bool SaveAccountData(List<AccountLegendaryArmory> unlocked)
+        public static bool SaveAccountData(List<AccountLegendaryArmory> unlocked, string account)
         {
             //Make sure dir exists
-            Directory.CreateDirectory(data_path);
-
+            Directory.CreateDirectory(data_path + account);
             try
             {
-                Logger.Warn("Saving account data to local storage.");
-                File.WriteAllText(data_path + @"\unlocked.json", JsonConvert.SerializeObject(unlocked, settings));
+                Logger.Debug("Saving account data to local storage.");
+                File.WriteAllText(data_path + account + @"\unlocked.json", JsonConvert.SerializeObject(unlocked, settings));
                 return true;
             }
             catch (Exception ex)
@@ -72,19 +71,84 @@ namespace LegendaryArmory.Helper
             }
         }
 
-        public static List<AccountLegendaryArmory> LoadAccountData()
+        public static List<AccountLegendaryArmory> LoadAccountData(string character)
         {
+            Logger.Warn("Loading account data from local storage.");
             var result = new List<AccountLegendaryArmory>();
+            var account = GetAccountFromCharacter(character);
+
             try
             {
-                Logger.Warn("Loading account data from local storage.");
-                result = JsonConvert.DeserializeObject<List<AccountLegendaryArmory>>(File.ReadAllText(data_path + "unlocked.json"), settings);
-                return result;
+                if (account != null)
+                {
+                    if (Directory.Exists(data_path + account))
+                    {
+                        result = JsonConvert.DeserializeObject<List<AccountLegendaryArmory>>(File.ReadAllText(data_path + account + @"\unlocked.json"), settings);
+                    }
+                    else
+                    {
+                        Logger.Warn("No account data for {account} found.", account);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Logger.Error(ex, "Failed to load account data from local storage.");
-                return result;
+            }
+            return result;
+        }
+
+        public static bool SaveCharacterData(string account, List<string> characters)
+        {
+            //Make sure dir exists
+            Directory.CreateDirectory(data_path);
+            var characterMap = new Dictionary<string, string>();
+
+            try
+            {
+                Logger.Debug("Saving character data to local storage.");
+                //Load existing data
+                if (File.Exists(data_path + "characters.json"))
+                {
+                    characterMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(data_path + "characters.json"));
+                }
+                //Update data
+                foreach (var character in characters)
+                {
+                    characterMap.Add(character, account);
+                }
+
+                File.WriteAllText(data_path + "characters.json", JsonConvert.SerializeObject(characterMap, Formatting.Indented));
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "Failed to save character data to local storage.");
+                return false;
+            }
+        }
+
+        private static string GetAccountFromCharacter(string character)
+        {
+            try
+            {
+                var characters = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(data_path + "characters.json"));
+                if (characters.ContainsKey(character))
+                {
+                    return characters[character];
+                }
+                else
+                {
+                    Logger.Warn("No Account for Character {character} found.", character);
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                {
+                    Logger.Error(ex, "Failed to load character data from local storage.");
+                    return null;
+                }
             }
         }
     }

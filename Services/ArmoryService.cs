@@ -123,27 +123,56 @@ namespace LegendaryArmory.Services
                 if (apiManager.HasPermissions(new[] { TokenPermission.Account, TokenPermission.Inventories, TokenPermission.Unlocks }))
                 {
                     Logger.Debug("Getting owned Legendaries from API");
+                    string account = "";
                     await Task.Run(() =>
                     {
                         OwnedLegendaries = apiManager.Gw2ApiClient.V2.Account.LegendaryArmory.GetAsync().Result.ToList();
+                        account = apiManager.Gw2ApiClient.V2.Account.GetAsync().Result.Name;
                     });
-                    Logger.Debug("Got {legendaresCount} owned Legendaries from API.", OwnedLegendaries.Count);
+                    Logger.Debug("Got {legendariesCount} owned Legendaries from API.", OwnedLegendaries.Count);
                     //Save data to local storage
-                    IOHelper.SaveAccountData(OwnedLegendaries);
+                    IOHelper.SaveAccountData(OwnedLegendaries, account);
                 }
-
                 else
                 {
                     Logger.Warn("Skipping getting owned Legendaries, API Key missing permissions.");
-                    OwnedLegendaries = IOHelper.LoadAccountData();
+                    OwnedLegendaries = IOHelper.LoadAccountData(GameService.Gw2Mumble.PlayerCharacter.Name);
                 }
             }
             catch (Exception ex)
             {
                 Logger.Warn(ex, "Failed to update owned Legendaries from API: " + ex.Message);
-                OwnedLegendaries = IOHelper.LoadAccountData();
+                OwnedLegendaries = IOHelper.LoadAccountData(GameService.Gw2Mumble.PlayerCharacter.Name);
             }
             view.UpdateAmounts(OwnedLegendaries);
+        }
+
+        public async void UpdateCharacters(Gw2ApiManager apiManager)
+        {
+            try
+            {
+                if (apiManager.HasPermissions(new[] { TokenPermission.Account, TokenPermission.Characters }))
+                {
+                    List<string> characters = new();
+                    string account = "";
+
+                    Logger.Debug("Getting characters associated with this account from API.");
+                    await Task.Run(() =>
+                    {
+                        characters = apiManager.Gw2ApiClient.V2.Characters.IdsAsync().Result.ToList();
+                        account = apiManager.Gw2ApiClient.V2.Account.GetAsync().Result.Name;
+                    });
+                    IOHelper.SaveCharacterData(account, characters);
+                }
+                else
+                {
+                    Logger.Info("Skipping getting characters associated with this account, API Key missing permissions.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn(ex, "Failed to update characters associated with this account from API: " + ex.Message);
+            }
         }
 
         private readonly List<string> weaponTypeOrder = new()

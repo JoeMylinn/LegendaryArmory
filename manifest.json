@@ -29,6 +29,10 @@
     "unlocks": {
       "optional": false,
       "details": "Required to see which Legendaries are unlocked."
+    },
+    "characters": {
+      "optional": true,
+      "details": "Required to see which Legendaries are unlocked when API is unavailable."
     }
   }
 }

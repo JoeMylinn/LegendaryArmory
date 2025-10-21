@@ -87,7 +87,20 @@ namespace LegendaryArmory
 
             Gw2ApiManager.SubtokenUpdated += async delegate
             {
-                await Task.Run(() => { _armoryService.UpdateAmounts(Gw2ApiManager, _armoryView); });
+                await Task.Run(() =>
+                {
+                    _armoryService.UpdateAmounts(Gw2ApiManager, _armoryView);
+                    _armoryService.UpdateCharacters(Gw2ApiManager);
+                });
+
+            };
+
+            GameService.Gw2Mumble.PlayerCharacter.NameChanged += async delegate
+            {
+                await Task.Run(() =>
+                {
+                    _armoryService.UpdateAmounts(Gw2ApiManager, _armoryView);
+                });
             };
 
 

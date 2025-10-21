@@ -279,15 +279,19 @@ namespace LegendaryArmory.UI
         {
             var updated = new List<int>();
 
-            foreach (var item in owned)
+            foreach (var img in LegendaryImages)
             {
-                foreach (var img in LegendaryImages.Where(t => t.Item1 == item.Id))
+                var current = owned.Where(i => i.Id == img.Item2.Item.Id);
+                var amount = 0;
+                if (current.Count() != 0)
                 {
-                    if (img.Item2.Item.Amount != item.Count)
-                    {
-                        img.Item2.Item.Amount = item.Count;
-                        updated.Add(img.Item1);
-                    }
+                    amount = current.First().Count;
+                }
+
+                if (img.Item2.Item.Amount != amount)
+                {
+                    img.Item2.Item.Amount = amount;
+                    updated.Add(img.Item1);
                 }
             }
 
