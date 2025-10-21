@@ -61,11 +61,191 @@ namespace LegendaryArmory.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account Bound on Use.
+        /// </summary>
+        internal static string AccountBindOnUse {
+            get {
+                return ResourceManager.GetString("AccountBindOnUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Bound on Acquire.
+        /// </summary>
+        internal static string AccountBound {
+            get {
+                return ResourceManager.GetString("AccountBound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Types.
+        /// </summary>
+        internal static string allTypes {
+            get {
+                return ResourceManager.GetString("allTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Weights.
+        /// </summary>
+        internal static string allWeights {
+            get {
+                return ResourceManager.GetString("allWeights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Items unlocked in your Legendary Armory are available for all of your characters. They can be found in the Equipment tab of your Hero Panel, alongside all of your other Equipment..
         /// </summary>
         internal static string ArmoryHint {
             get {
                 return ResourceManager.GetString("ArmoryHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        internal static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Boots.
+        /// </summary>
+        internal static string Boots {
+            get {
+                return ResourceManager.GetString("Boots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Coat.
+        /// </summary>
+        internal static string Coat {
+            get {
+                return ResourceManager.GetString("Coat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generation.
+        /// </summary>
+        internal static string generation {
+            get {
+                return ResourceManager.GetString("generation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gloves.
+        /// </summary>
+        internal static string Gloves {
+            get {
+                return ResourceManager.GetString("Gloves", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heavy.
+        /// </summary>
+        internal static string Heavy {
+            get {
+                return ResourceManager.GetString("Heavy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Helm.
+        /// </summary>
+        internal static string Helm {
+            get {
+                return ResourceManager.GetString("Helm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leggings.
+        /// </summary>
+        internal static string Leggings {
+            get {
+                return ResourceManager.GetString("Leggings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Light.
+        /// </summary>
+        internal static string Light {
+            get {
+                return ResourceManager.GetString("Light", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One-Handed.
+        /// </summary>
+        internal static string Mainhand {
+            get {
+                return ResourceManager.GetString("Mainhand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medium.
+        /// </summary>
+        internal static string Medium {
+            get {
+                return ResourceManager.GetString("Medium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Off Hand.
+        /// </summary>
+        internal static string Offhand {
+            get {
+                return ResourceManager.GetString("Offhand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shoulders.
+        /// </summary>
+        internal static string Shoulders {
+            get {
+                return ResourceManager.GetString("Shoulders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trinket.
+        /// </summary>
+        internal static string Trinket {
+            get {
+                return ResourceManager.GetString("Trinket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Two-Handed.
+        /// </summary>
+        internal static string TwoHand {
+            get {
+                return ResourceManager.GetString("TwoHand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade.
+        /// </summary>
+        internal static string UpgradeComponent {
+            get {
+                return ResourceManager.GetString("UpgradeComponent", resourceCulture);
             }
         }
     }

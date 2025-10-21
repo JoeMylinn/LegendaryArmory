@@ -301,7 +301,7 @@ namespace LegendaryArmory.Helper
                 Top = last.Bottom,
                 AutoSizeHeight = true,
                 AutoSizeWidth = true,
-                Text = item.Flags.First(flag => flag.ToString().StartsWith("Account")),
+                Text = Strings.UI.ResourceManager.GetString(item.Flags.First(flag => flag.StartsWith("Account"))),
             };
         }
 

@@ -115,11 +115,11 @@ namespace LegendaryArmory.UI
                 CanSelect = true,
             };
 
-            var allWeaponsMenuItem = weaponMenu.AddMenuItem("All Types");
-            foreach (var category in LegendaryImages.Where(t => t.Item2.Item.Type == ItemType.Weapon).SelectMany(t => ((LegendaryWeapon)t.Item2.Item).WieldType).Distinct())
+            var allWeaponsMenuItem = weaponMenu.AddMenuItem(Strings.UI.allTypes);
+            foreach (var category in LegendaryImages.Where(t => t.Item2.Item.Type == ItemType.Weapon).SelectMany(t => ((LegendaryWeapon)t.Item2.Item).WieldType).Distinct().OrderBy(t => "TMO".IndexOf(t.ToString()[0])))
             {
                 if (category == ProfessionWeaponFlag.Aquatic) continue;
-                var subMenu = weaponMenu.AddMenuItem(category.ToString());
+                var subMenu = weaponMenu.AddMenuItem(Strings.UI.ResourceManager.GetString(category.ToString()));
                 subMenu.Click += delegate
                 {
                     DeselctAll(armorMenu);
@@ -128,10 +128,10 @@ namespace LegendaryArmory.UI
                 };
             }
 
-            var allArmorsMenuItem = armorMenu.AddMenuItem("All Weights");
+            var allArmorsMenuItem = armorMenu.AddMenuItem(Strings.UI.allWeights);
             foreach (var category in LegendaryImages.Where(t => t.Item2.Item.Type == ItemType.Armor).Select(t => ((LegendaryArmor)t.Item2.Item).WeightClass).Distinct().ToList())
             {
-                var subMenu = armorMenu.AddMenuItem(category.ToString());
+                var subMenu = armorMenu.AddMenuItem(Strings.UI.ResourceManager.GetString(category.ToString()));
                 subMenu.Click += delegate
                 {
                     DeselctAll(weaponMenu);
@@ -140,10 +140,10 @@ namespace LegendaryArmory.UI
                 };
             }
 
-            var allOtherMenuItem = otherMenu.AddMenuItem("All Types");
+            var allOtherMenuItem = otherMenu.AddMenuItem(Strings.UI.allTypes);
             foreach (var category in LegendaryImages.Where(t => t.Item2.Item.Type != ItemType.Armor && t.Item2.Item.Type != ItemType.Weapon).Select(t => t.Item2.Item.Type).Distinct().ToList())
             {
-                var subMenu = otherMenu.AddMenuItem(category.ToString());
+                var subMenu = otherMenu.AddMenuItem(Strings.UI.ResourceManager.GetString(category.ToString()));
                 subMenu.Click += delegate
                 {
                     DeselctAll(weaponMenu);
@@ -208,7 +208,7 @@ namespace LegendaryArmory.UI
             {
                 var categoryPanel = new FlowPanel()
                 {
-                    Title = "Generation " + gen.ToString(),
+                    Title = Strings.UI.generation + " " + gen.ToString(),
                     Parent = buildPanel,
                     Width = buildPanel.ContentRegion.Width - 24,
                     HeightSizingMode = SizingMode.AutoSize,
@@ -230,7 +230,7 @@ namespace LegendaryArmory.UI
             {
                 var categoryPanel = new FlowPanel()
                 {
-                    Title = slot.ToString(),
+                    Title = Strings.UI.ResourceManager.GetString(slot.ToString()),
                     Parent = buildPanel,
                     Width = buildPanel.ContentRegion.Width - 24,
                     HeightSizingMode = SizingMode.AutoSize,
@@ -251,7 +251,7 @@ namespace LegendaryArmory.UI
             {
                 var categoryPanel = new FlowPanel()
                 {
-                    Title = category.ToString(),
+                    Title = Strings.UI.ResourceManager.GetString(category.ToString()),
                     Parent = buildPanel,
                     Width = buildPanel.ContentRegion.Width - 24,
                     HeightSizingMode = SizingMode.AutoSize,

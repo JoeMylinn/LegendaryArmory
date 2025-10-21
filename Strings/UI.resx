@@ -117,7 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountBindOnUse" xml:space="preserve">
+    <value>Account Bound on Use</value>
+  </data>
+  <data name="AccountBound" xml:space="preserve">
+    <value>Account Bound on Acquire</value>
+  </data>
+  <data name="allTypes" xml:space="preserve">
+    <value>All Types</value>
+  </data>
+  <data name="allWeights" xml:space="preserve">
+    <value>All Weights</value>
+  </data>
   <data name="ArmoryHint" xml:space="preserve">
     <value>Items unlocked in your Legendary Armory are available for all of your characters. They can be found in the Equipment tab of your Hero Panel, alongside all of your other Equipment.</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Boots" xml:space="preserve">
+    <value>Boots</value>
+  </data>
+  <data name="Coat" xml:space="preserve">
+    <value>Coat</value>
+  </data>
+  <data name="generation" xml:space="preserve">
+    <value>Generation</value>
+  </data>
+  <data name="Gloves" xml:space="preserve">
+    <value>Gloves</value>
+  </data>
+  <data name="Heavy" xml:space="preserve">
+    <value>Heavy</value>
+  </data>
+  <data name="Helm" xml:space="preserve">
+    <value>Helm</value>
+  </data>
+  <data name="Leggings" xml:space="preserve">
+    <value>Leggings</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Mainhand" xml:space="preserve">
+    <value>One-Handed</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="Offhand" xml:space="preserve">
+    <value>Off Hand</value>
+  </data>
+  <data name="Shoulders" xml:space="preserve">
+    <value>Shoulders</value>
+  </data>
+  <data name="Trinket" xml:space="preserve">
+    <value>Trinket</value>
+  </data>
+  <data name="TwoHand" xml:space="preserve">
+    <value>Two-Handed</value>
+  </data>
+  <data name="UpgradeComponent" xml:space="preserve">
+    <value>Upgrade</value>
   </data>
 </root>
