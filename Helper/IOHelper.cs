@@ -12,7 +12,7 @@ namespace LegendaryArmory.Helper
     internal class IOHelper
     {
         private static readonly Logger Logger = Logger.GetLogger<IOHelper>();
-        private static readonly string data_path = DirectoryUtil.BasePath + @"\legendary_armory\data\";
+        private static readonly string data_path = DirectoryUtil.BasePath + @"\legendary_armory\";
         private static readonly JsonSerializerSettings settings = new()
         {
             TypeNameHandling = TypeNameHandling.All,
@@ -151,5 +151,7 @@ namespace LegendaryArmory.Helper
                 }
             }
         }
+
+        public static bool FirstLaunch() => !Directory.Exists(data_path);
     }
 }

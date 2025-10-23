@@ -4,13 +4,18 @@ using Blish_HUD.Controls;
 using Blish_HUD.Modules;
 using Blish_HUD.Modules.Managers;
 using Blish_HUD.Settings;
+using Gw2Sharp.WebApi.V2.Models;
+using LegendaryArmory.Helper;
 using LegendaryArmory.Services;
 using LegendaryArmory.UI;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace LegendaryArmory
 {
@@ -18,7 +23,7 @@ namespace LegendaryArmory
     public class LegendaryArmory : Module
     {
 
-        private static readonly Logger Logger = Logger.GetLogger<Module>();
+        private static readonly Logger Logger = Logger.GetLogger<LegendaryArmory>();
 
         private CornerIcon _armoryCornerIcon;
         private StandardWindow _armoryWindow;
@@ -41,6 +46,8 @@ namespace LegendaryArmory
 
         protected override void Initialize()
         {
+            UpdatePermissions();
+
             _cTs = new CancellationTokenSource();
             _cT = _cTs.Token;
 
@@ -103,6 +110,7 @@ namespace LegendaryArmory
                 });
             };
 
+            await Task.Run(() => { _armoryService.UpdateCharacters(Gw2ApiManager); });
 
             // Base handler must be called
             base.OnModuleLoaded(e);
@@ -120,6 +128,42 @@ namespace LegendaryArmory
                 }, _cT);
             }
             catch (OperationCanceledException) { }
+        }
+
+        //Workaround to add new API permissions to the module
+        private void UpdatePermissions()
+        {
+            //Only do this the first time the new update is launched, to avoid overriding changes made by user
+            if (IOHelper.FirstLaunch())
+            {
+                var currentPermissions = GameService.Module.ModuleStates.Value[ModuleParameters.Manifest.Namespace].UserEnabledPermissions?.ToList();
+                var newPermissions = ModuleParameters.Manifest.ApiPermissions.Keys.ToArray();
+                var updatedPermissions = ModuleParameters.Manifest.ApiPermissions.Keys.ToList().Except(currentPermissions ?? new List<TokenPermission>());
+
+                //Skip if no permissions need to be updated
+                if (updatedPermissions.Count() > 0)
+                {
+                    Logger.Info("First launch since update, adding { updatedPermissions } API permissions.", string.Join(", ", updatedPermissions.ToArray()));
+
+                    GameService.Module.ModuleStates.Value[ModuleParameters.Manifest.Namespace].UserEnabledPermissions = newPermissions;
+                    GameService.Settings.Save();
+
+                    //Try to renew the subtoken, not necessary but avoids having to restart Blish HUD to get a new subtoken with updated permissions
+                    try
+                    {
+                        var flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+                        var RenewSubtoken = Gw2ApiManager.GetType().GetMethod("RenewSubtoken", flags);
+                        var _permissions = Gw2ApiManager.GetType().GetField("_permissions", flags);
+
+                        _permissions.SetValue(Gw2ApiManager, newPermissions.ToHashSet());
+                        RenewSubtoken.Invoke(Gw2ApiManager, null);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Warn(ex, "Failed to renew subtoken.");
+                    }
+                }
+            }
         }
 
         protected override void Update(GameTime gameTime)
