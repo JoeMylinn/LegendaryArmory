@@ -41,15 +41,23 @@ namespace LegendaryArmory.Helper
         public static List<LegendaryItem> LoadItemData()
         {
             var result = new List<LegendaryItem>();
-            try
+            Logger.Warn("Loading item data from local storage.");
+            if (File.Exists(data_path + "legendaries.json"))
             {
-                Logger.Warn("Loading item data from local storage.");
-                result = JsonConvert.DeserializeObject<List<LegendaryItem>>(File.ReadAllText(data_path + "legendaries.json"), settings);
-                return result;
+                try
+                {
+                    result = JsonConvert.DeserializeObject<List<LegendaryItem>>(File.ReadAllText(data_path + "legendaries.json"), settings);
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "Failed to load item data from local storage.");
+                    return result;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Logger.Error(ex, "Failed to load item data from local storage.");
+                Logger.Warn("No item data found.");
                 return result;
             }
         }
@@ -132,14 +140,23 @@ namespace LegendaryArmory.Helper
         {
             try
             {
-                var characters = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(data_path + "characters.json"));
-                if (characters.ContainsKey(character))
+                Logger.Warn("Getting account from current character.");
+                if (File.Exists(data_path + "characters.json"))
                 {
-                    return characters[character];
+                    var characters = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(data_path + "characters.json"));
+                    if (characters.ContainsKey(character))
+                    {
+                        return characters[character];
+                    }
+                    else
+                    {
+                        Logger.Warn("No Account for Character {character} found.", character);
+                        return null;
+                    }
                 }
                 else
                 {
-                    Logger.Warn("No Account for Character {character} found.", character);
+                    Logger.Warn("No character data found.");
                     return null;
                 }
             }
