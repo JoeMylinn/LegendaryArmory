@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using File = System.IO.File;
 
 namespace LegendaryArmory.Helper
@@ -81,7 +82,6 @@ namespace LegendaryArmory.Helper
 
         public static List<AccountLegendaryArmory> LoadAccountData(string character)
         {
-            Logger.Warn("Loading account data from local storage.");
             var result = new List<AccountLegendaryArmory>();
             var account = GetAccountFromCharacter(character);
 
@@ -89,6 +89,7 @@ namespace LegendaryArmory.Helper
             {
                 if (account != null)
                 {
+                    Logger.Warn("Loading data for {account} from local storage.", account);
                     if (Directory.Exists(data_path + account))
                     {
                         result = JsonConvert.DeserializeObject<List<AccountLegendaryArmory>>(File.ReadAllText(data_path + account + @"\unlocked.json"), settings);
@@ -156,7 +157,13 @@ namespace LegendaryArmory.Helper
                 }
                 else
                 {
-                    Logger.Warn("No character data found.");
+                    //Check if only single account is saved
+                    Logger.Warn("No character data found. Checking if only single account is saved.");
+                    var accounts = Directory.GetDirectories(data_path);
+                    if (accounts.Length == 1)
+                    {
+                        return new DirectoryInfo(accounts.First()).Name;
+                    }
                     return null;
                 }
             }
