@@ -115,7 +115,7 @@ namespace LegendaryArmory.Helper
                 //Update data
                 foreach (var character in characters)
                 {
-                    characterMap.Add(character, account);
+                    characterMap[character] = account;
                 }
 
                 File.WriteAllText(data_path + "characters.json", JsonConvert.SerializeObject(characterMap, Formatting.Indented));
