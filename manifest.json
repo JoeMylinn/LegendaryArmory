@@ -32,7 +32,7 @@
     },
     "characters": {
       "optional": true,
-      "details": "Required to see which Legendaries are unlocked when API is unavailable."
+      "details": "Required to support multiple accounts when API is unavailable."
     }
   }
 }
