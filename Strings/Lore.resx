@@ -328,7 +328,7 @@
     <comment>Aurene's Wing</comment>
   </data>
   <data name=":90551" xml:space="preserve">
-    <value>Explorers venture into The Mists, and sometimes the Mists venture back. Though far less sentient than the Mist-being gw1:Razah, Exordium takes some joy in adapting to its wielder's needs and expectations.</value>
+    <value>Explorers venture into The Mists, and sometimes the Mists venture back. Though far less sentient than the Mist-being Razah, Exordium takes some joy in adapting to its wielder's needs and expectations.</value>
     <comment>Exordium</comment>
   </data>
   <data name=":83113" xml:space="preserve">
@@ -932,5 +932,20 @@
   <data name=":105171" xml:space="preserve">
     <value>A mysterious pair of gloves that seek to hold the very essence of the worlds between. Open your hands, and harness the energies of a deteriorating fractal to bring that destruction to your foes.</value>
     <comment>Eikasia, Mists-Grasper (heavy)</comment>
+  </data>
+  <data name=":106273" xml:space="preserve">
+    <value>The seers, unable to resist an opportunity for symbolism, had bound Pax and Bellum to the aetheric anchor with a clear message in mind: peace and war were born together, and one is never far from the other.</value><comment>Ancora Bellum</comment>
+  </data>
+  <data name=":105653" xml:space="preserve">
+    <value>The seers, unable to resist an opportunity for symbolism, had bound Pax and Bellum to the aetheric anchor with a clear message in mind: peace and war were born together, and one is never far from the other.</value><comment>Ancora Pax</comment>
+  </data>
+  <data name=":105921" xml:space="preserve">
+    <value>"Thought I was pullin' yer fins, didn't ya? I told ya. I tell... I tell no... I told ya the truth!"—"Captain" Lakes</value><comment>Selachimorpha</comment>
+  </data>
+  <data name=":106658" xml:space="preserve">
+    <value>"Thought I was pullin' yer fins, didn't ya? I told ya. I tell... I tell no... I told ya the truth!"—"Captain" Lakes</value><comment>Selachimorpha</comment>
+  </data>
+  <data name=":106178" xml:space="preserve">
+    <value>"Thought I was pullin' yer fins, didn't ya? I told ya. I tell... I tell no... I told ya the truth!"—"Captain" Lakes</value><comment>Selachimorpha</comment>
   </data>
 </root>

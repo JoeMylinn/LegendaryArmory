@@ -180,4 +180,7 @@
   <data name="UpgradeComponent" xml:space="preserve">
     <value>Upgrade</value>
   </data>
+  <data name="HelmAquatic" xml:space="preserve">
+    <value>Aquatic Helm</value>
+  </data>
 </root>

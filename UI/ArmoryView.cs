@@ -20,6 +20,7 @@ namespace LegendaryArmory.UI
         private List<string> oneHanded = new() { "Sword", "Axe", "Dagger", "Mace", "Pistol", "Scepter" };
         private List<string> offHand = new() { "Focus", "Warhorn", "Torch", "Shield" };
         private List<string> trinkets = new() { "Accessory", "Ring", "Amulet" };
+        private List<string> slotOrder = new() { "HelmAquatic", "Helm", "Shoulders", "Coat", "Gloves", "Leggings", "Boots" };
 
         public List<(int, LegendaryImage)> LegendaryImages = new();
 
@@ -225,8 +226,8 @@ namespace LegendaryArmory.UI
 
             //Armor Categories
             var armors = LegendaryImages.Where(t => t.Item2.Item.Type == ItemType.Armor).Select(t => t.Item2).ToList();
-            //Custom sort order, change to custom service later
-            foreach (var slot in armors.Select(i => ((LegendaryArmor)i.Item).Slot).Distinct().ToList().OrderBy(t => "HSCGLB".IndexOf(t.ToString()[0])))
+            //Custom sort order, improve, maybe save layout in json?
+            foreach (var slot in armors.Select(i => ((LegendaryArmor)i.Item).Slot).Distinct().ToList().OrderBy(t => slotOrder.IndexOf(t.ToString())))
             {
                 var categoryPanel = new FlowPanel()
                 {

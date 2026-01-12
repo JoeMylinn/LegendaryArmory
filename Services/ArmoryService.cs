@@ -240,7 +240,7 @@ namespace LegendaryArmory.Services
                 <= 30704 => 1,
                 > 30704 and <= 90551 => 2,
                 > 90551 and <= 97783 => 3,
-                > 97783 and <= 103815 => 4,
+                > 97783 and <= 106273 => 4,
                 _ => 0,
             };
             weapon.WieldType = GetWeaponFlags(item.Details.Type.ToString());
