@@ -31,6 +31,8 @@ namespace LegendaryArmory
         private ArmoryService _armoryService;
         private CancellationTokenSource _cTs;
         private CancellationToken _cT;
+        private SettingCollection _internalSettings;
+        private SettingEntry<bool> _firstLaunch;
 
         internal SettingsManager SettingsManager => ModuleParameters.SettingsManager;
         internal ContentsManager ContentsManager => ModuleParameters.ContentsManager;
@@ -42,6 +44,9 @@ namespace LegendaryArmory
 
         protected override void DefineSettings(SettingCollection settings)
         {
+            _internalSettings = settings.AddSubCollection("InternalSettings", false, true);
+            _firstLaunch = _internalSettings.DefineSetting("firstLaunch", true);
+            
         }
 
         protected override void Initialize()
@@ -134,33 +139,44 @@ namespace LegendaryArmory
         private void UpdatePermissions()
         {
             //Only do this the first time the new update is launched, to avoid overriding changes made by user
-            if (IOHelper.FirstLaunch())
+            if (_firstLaunch.Value)
             {
-                var currentPermissions = GameService.Module.ModuleStates.Value[ModuleParameters.Manifest.Namespace].UserEnabledPermissions?.ToList();
-                var newPermissions = ModuleParameters.Manifest.ApiPermissions.Keys.ToArray();
-                var updatedPermissions = ModuleParameters.Manifest.ApiPermissions.Keys.ToList().Except(currentPermissions ?? new List<TokenPermission>());
-
-                //Skip if no permissions need to be updated
-                if (updatedPermissions.Count() > 0)
+                Logger.Info("First launch since update");
+                _firstLaunch.Value = false;
+                //Deprecated, kept to avoid overriding settings, remove in future release
+                if (IOHelper.FirstLaunch())
                 {
-                    Logger.Info("First launch since update, adding { updatedPermissions } API permissions.", string.Join(", ", updatedPermissions.ToArray()));
+                    var currentPermissions = GameService.Module.ModuleStates.Value[ModuleParameters.Manifest.Namespace]
+                        .UserEnabledPermissions?.ToList();
+                    var newPermissions = ModuleParameters.Manifest.ApiPermissions.Keys.ToArray();
+                    var updatedPermissions = ModuleParameters.Manifest.ApiPermissions.Keys.ToList()
+                        .Except(currentPermissions ?? new List<TokenPermission>());
 
-                    GameService.Module.ModuleStates.Value[ModuleParameters.Manifest.Namespace].UserEnabledPermissions = newPermissions;
-                    GameService.Settings.Save();
-
-                    //Try to renew the subtoken, not necessary but avoids having to restart Blish HUD to get a new subtoken with updated permissions
-                    try
+                    //Skip if no permissions need to be updated
+                    if (updatedPermissions.Count() > 0)
                     {
-                        var flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
-                        var RenewSubtoken = Gw2ApiManager.GetType().GetMethod("RenewSubtoken", flags);
-                        var _permissions = Gw2ApiManager.GetType().GetField("_permissions", flags);
+                        Logger.Info("First launch since update, adding { updatedPermissions } API permissions.",
+                            string.Join(", ", updatedPermissions.ToArray()));
 
-                        _permissions.SetValue(Gw2ApiManager, newPermissions.ToHashSet());
-                        RenewSubtoken.Invoke(Gw2ApiManager, null);
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Warn(ex, "Failed to renew subtoken.");
+                        GameService.Module.ModuleStates.Value[ModuleParameters.Manifest.Namespace]
+                            .UserEnabledPermissions = newPermissions;
+                        GameService.Settings.Save();
+
+                        //Try to renew the subtoken, not necessary but avoids having to restart Blish HUD to get a new subtoken with updated permissions
+                        try
+                        {
+                            var flags = System.Reflection.BindingFlags.NonPublic |
+                                        System.Reflection.BindingFlags.Instance;
+                            var RenewSubtoken = Gw2ApiManager.GetType().GetMethod("RenewSubtoken", flags);
+                            var _permissions = Gw2ApiManager.GetType().GetField("_permissions", flags);
+
+                            _permissions.SetValue(Gw2ApiManager, newPermissions.ToHashSet());
+                            RenewSubtoken.Invoke(Gw2ApiManager, null);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Warn(ex, "Failed to renew subtoken.");
+                        }
                     }
                 }
             }
