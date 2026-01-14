@@ -141,7 +141,6 @@ namespace LegendaryArmory
             //Only do this the first time the new update is launched, to avoid overriding changes made by user
             if (_firstLaunch.Value)
             {
-                Logger.Info("First launch since update");
                 _firstLaunch.Value = false;
                 //Deprecated, kept to avoid overriding settings, remove in future release
                 if (IOHelper.FirstLaunch())
