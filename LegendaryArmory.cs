@@ -92,33 +92,32 @@ namespace LegendaryArmory
 
         protected override async void OnModuleLoaded(EventArgs e)
         {
-            _armoryCornerIcon.Click += delegate
-            {
-                _armoryWindow.ToggleWindow(_armoryView);
-            };
+            _armoryCornerIcon.Click += OnCornerIconClick;
 
-            Gw2ApiManager.SubtokenUpdated += async delegate
-            {
-                await Task.Run(() =>
-                {
-                    _armoryService.UpdateAmounts(Gw2ApiManager, _armoryView);
-                    _armoryService.UpdateCharacters(Gw2ApiManager);
-                });
+            Gw2ApiManager.SubtokenUpdated += OnSubtokenUpdated;
 
-            };
-
-            GameService.Gw2Mumble.PlayerCharacter.NameChanged += async delegate
-            {
-                await Task.Run(() =>
-                {
-                    _armoryService.UpdateAmounts(Gw2ApiManager, _armoryView);
-                });
-            };
+            GameService.Gw2Mumble.PlayerCharacter.NameChanged += OnNameChanged;
 
             await Task.Run(() => { _armoryService.UpdateCharacters(Gw2ApiManager); });
 
             // Base handler must be called
             base.OnModuleLoaded(e);
+        }
+
+        private void OnCornerIconClick(object sender, EventArgs e)
+        {
+            _armoryWindow.ToggleWindow(_armoryView);
+        }
+        
+        private void OnSubtokenUpdated(object sender, EventArgs e)
+        {
+            _armoryService.UpdateAmounts(Gw2ApiManager, _armoryView);
+            _armoryService.UpdateCharacters(Gw2ApiManager);
+        }
+
+        private void OnNameChanged(object sender, EventArgs e)
+        {
+            _armoryService.UpdateAmounts(Gw2ApiManager, _armoryView);
         }
 
         private async void UpdateAmountsRepeat()
@@ -192,6 +191,10 @@ namespace LegendaryArmory
             _cTs.Cancel();
             _cTs.Dispose();
             // Unload here
+            _armoryCornerIcon.Click -= OnCornerIconClick;
+            GameService.Gw2Mumble.PlayerCharacter.NameChanged -= OnNameChanged;
+            Gw2ApiManager.SubtokenUpdated -= OnSubtokenUpdated;
+            
             _armoryCornerIcon?.Dispose();
             _armoryWindow?.Dispose();
             _armoryView?.DoUnload();
